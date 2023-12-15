@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Culte index{% endblock %}
+
+{% block body %}
+    <h1>Culte index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libelle</th>
+                <th>CreatedAt</th>
+                <th>Dateculte</th>
+                <th>Effectif</th>
+                <th>NouveauVenu</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for culte in cultes %}
+            <tr>
+                <td>{{ culte.id }}</td>
+                <td>{{ culte.libelle }}</td>
+                <td>{{ culte.createdAt ? culte.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ culte.dateculte ? culte.dateculte|date('Y-m-d') : '' }}</td>
+                <td>{{ culte.effectif }}</td>
+                <td>{{ culte.nouveauVenu }}</td>
+                <td>
+                    <a href="{{ path('app_culte_show', {'id': culte.id}) }}">show</a>
+                    <a href="{{ path('app_culte_edit', {'id': culte.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_culte_new') }}">Create new</a>
+{% endblock %}

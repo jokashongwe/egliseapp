@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New TypeCulte{% endblock %}
+
+{% block body %}
+    <h1>Create new TypeCulte</h1>
+
+    {{ include('type_culte/_form.html.twig') }}
+
+    <a href="{{ path('app_type_culte_index') }}">back to list</a>
+{% endblock %}

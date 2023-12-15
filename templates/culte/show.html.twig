@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Culte{% endblock %}
+
+{% block body %}
+    <h1>Culte</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ culte.id }}</td>
+            </tr>
+            <tr>
+                <th>Libelle</th>
+                <td>{{ culte.libelle }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ culte.createdAt ? culte.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Dateculte</th>
+                <td>{{ culte.dateculte ? culte.dateculte|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Effectif</th>
+                <td>{{ culte.effectif }}</td>
+            </tr>
+            <tr>
+                <th>NouveauVenu</th>
+                <td>{{ culte.nouveauVenu }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_culte_index') }}">back to list</a>
+
+    <a href="{{ path('app_culte_edit', {'id': culte.id}) }}">edit</a>
+
+    {{ include('culte/_delete_form.html.twig') }}
+{% endblock %}
