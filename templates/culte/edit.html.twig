@@ -1,13 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Culte{% endblock %}
+{% block title %}Modifier Culte{% endblock %}
 
 {% block body %}
-    <h1>Edit Culte</h1>
+<div class="container">
+    <h1>Modifier Culte</h1>
 
-    {{ include('culte/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('culte/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('app_culte_index') }}">back to list</a>
+    <a href="{{ path('app_culte_index') }}">Tout les cultes</a>
 
     {{ include('culte/_delete_form.html.twig') }}
+</div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        var inp = document.getElementById("culte_dateculte");
+        if(inp){
+            inp.setAttribute("type","date");
+        }
+    </script>
 {% endblock %}

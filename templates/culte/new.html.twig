@@ -1,11 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Culte{% endblock %}
+{% block title %}Nouveau Culte{% endblock %}
 
 {% block body %}
-    <h1>Create new Culte</h1>
+<div class="container">
+    <h1>Nouveau Culte</h1>
 
     {{ include('culte/_form.html.twig') }}
 
-    <a href="{{ path('app_culte_index') }}">back to list</a>
+    <a class="back-link link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ path('app_culte_index') }}">Retour à la liste</a>
+</div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        var inp = document.getElementById("culte_dateculte");
+        if(inp){
+            inp.setAttribute("type","date");
+        }
+    </script>
 {% endblock %}

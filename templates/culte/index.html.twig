@@ -1,43 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Culte index{% endblock %}
+{% block title %}Nos Cultes{% endblock %}
 
 {% block body %}
-    <h1>Culte index</h1>
+<div class="container">
+    <h1>Nos Cultes</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Libelle</th>
-                <th>CreatedAt</th>
-                <th>Dateculte</th>
-                <th>Effectif</th>
-                <th>NouveauVenu</th>
-                <th>actions</th>
+                <th scope="col" >Id</th>
+                <th scope="col" >Libelle</th>
+                <th scope="col" >Date Création</th>
+                <th scope="col" >Date du Culte</th>
+                <th scope="col" >Effectif Total</th>
+                <th scope="col" >NouveauVenu</th>
+                <th scope="col" >actions</th>
             </tr>
         </thead>
         <tbody>
         {% for culte in cultes %}
             <tr>
-                <td>{{ culte.id }}</td>
+                <td scope="row" >{{ culte.id }}</td>
                 <td>{{ culte.libelle }}</td>
                 <td>{{ culte.createdAt ? culte.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ culte.dateculte ? culte.dateculte|date('Y-m-d') : '' }}</td>
                 <td>{{ culte.effectif }}</td>
                 <td>{{ culte.nouveauVenu }}</td>
                 <td>
-                    <a href="{{ path('app_culte_show', {'id': culte.id}) }}">show</a>
-                    <a href="{{ path('app_culte_edit', {'id': culte.id}) }}">edit</a>
+                    <a href="{{ path('app_culte_show', {'id': culte.id}) }}">Afficher</a>
+                    <a href="{{ path('app_culte_edit', {'id': culte.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">Aucune donnée</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_culte_new') }}">Create new</a>
+    <a class="btn btn-primary" href="{{ path('app_culte_new') }}">Ajouter un culte</a>
+</div>
 {% endblock %}
