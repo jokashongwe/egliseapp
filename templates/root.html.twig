@@ -1,0 +1,156 @@
+<!-- Font Awesome -->
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+		<link
+		href="{{ asset('main.css') }}" rel="stylesheet"/>
+		<!-- Google Fonts -->
+		<link
+		href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+		<!-- MDB -->
+		<link href="{{ asset('mdb.min.css') }}" rel="stylesheet"/>
+		<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+
+
+		<style>
+			a {
+				color: #262626 !important;
+				font-family: 'Roboto';
+			}
+		</style>
+		<title>C.E LA TRINITE
+			{% block title %}{% endblock %}
+		</title>
+		{% block stylesheets %}{% endblock %}
+
+
+	</head>
+	<body>
+
+		<nav class="navbar navbar-expand-lg  bg-light mb-3">
+			<div class="container-fluid">
+				<div class="collapse navbar-collapse justify-content-center">
+					<ul
+						class="navbar-nav">
+						<!-- Dropdown -->
+
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+								Compte
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+								<li>
+									<a href="" class="nav-link">Accueil</a>
+								</li>
+
+								<li>
+									<a class="nav-link" href="">Déconnexion</a>
+								</li>
+							</ul>
+						</li>
+
+
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+								Gestion des Membres
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+
+								<li>
+									<a class="dropdown-item" href="{{path('identification_fidel')}}">Nouvel Enregistrement</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="">Liste de Membres</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="">Recherche d'un Membre</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="">Modication d'un Membre</a>
+								</li>
+
+							</li>
+						</li>
+					</ul>
+				</li>
+
+
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+						Finances
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+
+						<li>
+							<a class="dropdown-item" href="">Caisses</a>
+						</li>
+
+						<li>
+							<a class="dropdown-item" href="">Indicateur Caisse</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="">Infos Sur le Paiement</a>
+						</li>
+					</li>
+				</li>
+			</ul>
+		</li>
+
+
+	</body>
+</html>
+<li class="nav-item dropdown">
+	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">Configuration de l'eglise</a>
+	<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+		<li>
+			<a class="dropdown-item" href="#">Utilisateurs<i class="fa-solid fa-caret-right"></i>
+			</a>
+			<ul class="dropdown-menu dropdown-submenu">
+				<li>
+					<a class="dropdown-item" href="">Creation Utilisateur</a>
+				</li>
+				<li>
+					<a class="dropdown-item" href="">Modification Utilisateur</a>
+				</li>
+				<li>
+					<a class="dropdown-item" href="">Supprimer Utilisateur</a>
+				</li>
+				<li>
+					<a class="dropdown-item" href="">liste Utilisateur</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a class="dropdown-item" href="#">Administrateur<i class="fa-solid fa-caret-right"></i>
+			</a>
+			<ul class="dropdown-menu dropdown-submenu">
+				<li>
+					<a class="dropdown-item" href="">Creation Administrateur</a>
+				</li>
+				<li>
+					<a class="dropdown-item" href="">Modification Administrateur</a>
+				</li>
+				<li>
+					<a class="dropdown-item" href="">Liste utilisateurs</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a class="dropdown-item" href="#">Sms<i class="fa-solid fa-caret-right"></i>
+			</a>
+			<ul class="dropdown-menu dropdown-submenu">
+				<li>
+					<a class="dropdown-item" href="">Envoie Sms</a>
+				</li>
+				<li>
+					<a class="dropdown-item" href="">Envoie Personnel</a>
+				</li>
+			</ul>
+		</li>{#<li>
+					</li>#}</li>
+</li></ul></li></ul></li></ul></li></html></body></html> </body></html></ul></div></body></html></div></nav>{% block body %}{% endblock %}{% for message in app.flashes('danger') %}<div class="alert alert-danger">{{ message }}</div>{% endfor %}<!-- MDB --><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="{{ asset('login/js/jquery.min.js') }}"></script>{% block javascripts %}{% endblock %}</body></html></body></html>

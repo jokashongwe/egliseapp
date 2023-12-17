@@ -1,0 +1,231 @@
+{% extends "root.html.twig" %}
+
+{% block stylesheets %}
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,700" rel="stylesheet" type="text/css">
+
+	<link rel=" stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css ">
+
+	<link rel="stylesheet" href="{{asset('parent/css/style.css')}} ">
+{% endblock %}
+
+{% block javascripts %}
+
+	<script src="{{asset('parent/js/jquery.min.js')}} "></script>
+	<script src="{{asset('parent/js/popper.js')}} "></script>
+	<script src="{{asset('parent/js/bootstrap.min.js')}} "></script>
+	<script src="{{asset('parent/js/jquery.validate.min.js')}} "></script>
+	<script src="{{asset('parent/js/main.js')}} "></script>
+
+	<script>
+
+		function fermer() {
+
+document.getElementById("toast1").hidden = true
+}
+	</script>
+
+
+{% endblock %}
+
+
+{% block body %}
+
+	<section class="ftco-section ">
+		<div class="container ">
+			<div class="row justify-content-center ">
+				<div class="col-md-12 ">
+					<div class="wrapper ">
+						<div class="row no-gutters ">
+							<div class="col-lg-8 col-md-7 order-md-last d-flex align-items-stretch ">
+								<div class="contact-wrap w-100 p-md-5 p-4 ">
+									<div class="col-md-4 col-sm-12">
+										<img src="{{ asset('image/trinite.jpg') }}" style="height: 100px; background-color:white">
+									</div>
+									<div id="form-message-warning " class="mb-4"></div>
+									<div id="form-message-success " class="mb-4"></div>
+									<form method="POST" action="{{path('identification_fidel')}}" id="contactForm " name="contactForm " class="contactForm ">
+
+										<div class="row">
+											<div class="col-md-6 ">
+												<div class="form-group ">
+													<label class="label" for="name">Nom</label>
+													<input type="text" class="form-control required" id="first-name" name="nom" placeholder="Nom" required>
+												</div>
+											</div>
+											<div class="col-md-6 ">
+												<div class="form-group ">
+													<label class="label " for="name">Postnom</label>
+													<input type="text" class="form-control required" id="first-name" name="postnom" placeholder="Postnom" required>
+												</div>
+											</div>
+										</div>
+										<div class="row ">
+											<div class="col-md-6 ">
+												<div class="form-group ">
+													<label class="label " for="name">Prenom</label>
+													<input type="text" class="form-control required" id="first-name" name="prenom" placeholder="Prenom" required>
+												</div>
+											</div>
+											<div class="col-md-6 ">
+												<div class="form-group ">
+													<label class="label " for="name">Sexe</label>
+
+													<select class="form-select" name="sexe">
+														<option value="Masculin">Masculin</option>
+														<option value="Féminin">Féminin</option>
+													</select>
+												</div>
+											</div>
+										</div>
+
+										<div class="row ">
+											<div class="col-md-6 ">
+												<div class="form-group ">
+													<label class="label" for="name">
+														Date de Naissance
+													</label>
+													<input type="date" class="form-control" name="date_naissance" placeholder="" required>
+												</div>
+											</div>
+											<div class="col-md-6 ">
+												<div class="form-group ">
+													<label class="label " for="name">Profession</label>
+													<input type="text" class="form-control required" id="first-name" name="profession" placeholder="Profession" required>
+												</div>
+											</div>
+										</div>
+
+										<div class="row ">
+											<div class="col-md-6 ">
+												<div class="form-group ">
+													<label class="label" for="name">
+														Date de baptême
+													</label>
+													<input type="date" class="form-control" name="date_bapteme" placeholder="" required>
+												</div>
+											</div>
+											<div class="col-md-6 ">
+												<div class="form-group ">
+													<label class="label " for="name">
+														Date de conversion
+													</label>
+													<input type="date" class="form-control" name="date_conversion" placeholder="" required>
+												</div>
+											</div>
+										</div>
+
+										<div class="row">
+											<div class="col-md-6 ">
+												<div class="form-group ">
+													<label class="label" for="name">Numero_Phone</label>
+													<input type="text" class="form-control required" id="first-name" name="phone" placeholder="Numero_Phone" required>
+												</div>
+											</div>
+											<div class="col-md-6 ">
+												<div class="form-group ">
+													<label class="label " for="name">Etat Civil</label>
+
+													<select class="form-select" name="etat_civil">
+														<option value="MARIE">MARIE</option>
+														<option value="CELIBATAIRE">CELIBATAIRE</option>
+														<option value="DIVORCE">DIVORCE</option>
+														<option value="AUTRES">AUTRES</option>
+													</select>
+
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6 ">
+												<div class="form-group ">
+													<label class="label" for="name">Categorie</label>
+													<select class="form-select" name="categorie">
+														<option value="PAPA">PAPA</option>
+														<option value="MAMAN">MAMAN</option>
+														<option value="JEUNE">JEUNE</option>
+													</select>
+												</div>
+											</div>
+
+										</div>
+
+										<div class="row ">
+											<div class="col-md-12 ">
+												<div class="form-group ">
+													<label class="label " for="# ">Observation</label>
+													<textarea name="observation" class="form-control " id="message " cols="30 " rows="4 " placeholder="Message " required></textarea>
+												</div>
+											</div>
+											<div class="col-md-12 ">
+												<div class="form-group ">
+													<button type="submit" class="btn btn-danger ">Enregistrer</button>
+													<div class="submitting "></div>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-5 d-flex align-items-stretch ">
+								<div class="info-wrap bg-danger w-100 p-md-5 p-4 ">
+
+									<br>
+									<div class="dbox w-100 d-flex align-items-start ">
+
+										<div class="icon d-flex align-items-center justify-content-center ">
+											<span class="fa fa-map-marker "></span>
+										</div>
+
+										<div class="text pl-3 ">
+											<p>
+												<span>Addresse:</span>...........................</p>
+										</div>
+									</div>
+									<div class="dbox w-100 d-flex align-items-center ">
+										<div class="icon d-flex align-items-center justify-content-center ">
+											<span class="fa fa-phone "></span>
+										</div>
+										<div class="text pl-3 ">
+											<p>
+												<span>Phone:</span>
+												<a href="">...................</a>
+											</p>
+										</div>
+									</div>
+									<div class="dbox w-100 d-flex align-items-center ">
+										<div class="icon d-flex align-items-center justify-content-center ">
+											<span class="fa fa-paper-plane "></span>
+										</div>
+										<div class="text pl-3 ">
+											<p>
+												<span>Email:</span>
+												<a href="...................">
+													...........................</a>
+											</p>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	{% for message in app.flashes('notification') %}
+
+		<div class="toast show" role="alert" id="toast1" data-delay="5000" style="position: absolute; top: 1rem; right: 1rem; min-width:250px;" aria-live="assertive" aria-atomic="true">
+			<div class="toast-header">
+				<strong class="me-auto">Message</strong>
+				<small></small>
+				<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Fermer" onclick="fermer()">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="toast-body">
+				<p class="text-danger">{{message}}</p>
+			</div>
+		</div>
+	{% endfor %}
+{% endblock %}

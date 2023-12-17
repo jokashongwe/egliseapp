@@ -1,0 +1,1365 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1
+-- Généré le : lun. 23 mai 2022 à 12:31
+-- Version du serveur : 10.4.21-MariaDB
+-- Version de PHP : 8.0.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données : `ecole_la_bonte3`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `absences`
+--
+
+CREATE TABLE `absences` (
+  `id` int(11) NOT NULL,
+  `agentaffectation_id` int(11) NOT NULL,
+  `typeabsences_id` int(11) NOT NULL,
+  `observation` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `acces_caisse`
+--
+
+CREATE TABLE `acces_caisse` (
+  `id` int(11) NOT NULL,
+  `agent_id` int(11) NOT NULL,
+  `solde_fc` decimal(10,2) NOT NULL,
+  `solde_usd` decimal(10,2) NOT NULL,
+  `date_access` datetime NOT NULL,
+  `type_access` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `affectation`
+--
+
+CREATE TABLE `affectation` (
+  `id` int(11) NOT NULL,
+  `id_eleve_id` int(11) NOT NULL,
+  `id_classe_id` int(11) NOT NULL,
+  `id_annee_scolaire_id` int(11) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `agent`
+--
+
+CREATE TABLE `agent` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `postnom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prenom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sexe` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lieu_naissance` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_naissance` date NOT NULL,
+  `date_engagement` date NOT NULL,
+  `niveau_etude` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `numero_phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `numero_adresse` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `avenue_adresse` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `quartier_adresse` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `commune_adresse` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ville_adresse` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `province_adresse` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `matricule_agent` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_enregistrement` datetime NOT NULL,
+  `supp` tinyint(1) NOT NULL,
+  `nationalite` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `secteur_origine` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `territoire_origine` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `province_origine` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `usercreation` int(11) NOT NULL,
+  `usermodif` int(11) DEFAULT NULL,
+  `datemodif` datetime DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `documentreference` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `etatcivil` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `agent`
+--
+
+INSERT INTO `agent` (`id`, `nom`, `postnom`, `prenom`, `sexe`, `lieu_naissance`, `date_naissance`, `date_engagement`, `niveau_etude`, `numero_phone`, `numero_adresse`, `avenue_adresse`, `quartier_adresse`, `commune_adresse`, `ville_adresse`, `province_adresse`, `matricule_agent`, `email`, `date_enregistrement`, `supp`, `nationalite`, `secteur_origine`, `territoire_origine`, `province_origine`, `usercreation`, `usermodif`, `datemodif`, `image`, `documentreference`, `etatcivil`) VALUES
+(1, 'Doe', 'Doe', 'John', 'M', 'Kin', '2022-04-18', '2022-04-18', 'doctorat', '+243823281659', '21b', '---', '--', '--', '---', '--', 'TEST01', 'test@test.com', '2022-04-18 16:50:57', 0, '--', '--', '--', '--', 1, NULL, NULL, '--', '--', ''),
+(2, 'kay', 'mul', 'mich', 'M', 'Kin', '2022-05-13', '2022-05-13', '---', '--', '--', '---', '--', '--', '---', '--', 'TEST02', 'test@test1.com', '2022-05-13 14:24:15', 0, '--', '--', '--', '--', 1, NULL, NULL, '--', '--', ''),
+(3, 'Kayembe', 'Mulumba', 'Michee', 'Masculin', 'Kinshasa', '2022-05-03', '2022-05-25', 'Docteur', '+243823281659', 'Zaba', '21bis', 'Mbanza_Lemba', 'Lemba', 'Kinshasa', 'Kinshasa', '24330CR99', 'mekayembeeegmail.com', '2022-05-20 20:41:36', 0, ' Congolaise ', 'Secteur', 'territoire', 'province', 1, 1, '2022-05-21 11:53:35', 'uploads/170189.png', 'uploads/28203.png', 'Marié');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `agent_affectation`
+--
+
+CREATE TABLE `agent_affectation` (
+  `id` int(11) NOT NULL,
+  `direction_id` int(11) NOT NULL,
+  `agent_id` int(11) NOT NULL,
+  `grades_id` int(11) NOT NULL,
+  `date_debut` date NOT NULL,
+  `date_fin` date DEFAULT NULL,
+  `supp` tinyint(1) NOT NULL,
+  `idsuperviseur` int(11) DEFAULT NULL,
+  `salaire` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `agent_affectation`
+--
+
+INSERT INTO `agent_affectation` (`id`, `direction_id`, `agent_id`, `grades_id`, `date_debut`, `date_fin`, `supp`, `idsuperviseur`, `salaire`) VALUES
+(1, 1, 3, 11, '2022-05-18', '2022-05-18', 0, 3, 36);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `annee_scolaire`
+--
+
+CREATE TABLE `annee_scolaire` (
+  `id` int(11) NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` enum('Lancé','En Cours','Terminé') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `annee_scolaire` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_debut` date NOT NULL,
+  `date_fin` date NOT NULL,
+  `date_creation` datetime NOT NULL,
+  `date_modif` datetime DEFAULT NULL,
+  `user_modif` int(11) DEFAULT NULL,
+  `user_creation` int(11) NOT NULL,
+  `supp` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `annee_scolaire`
+--
+
+INSERT INTO `annee_scolaire` (`id`, `description`, `status`, `annee_scolaire`, `date_debut`, `date_fin`, `date_creation`, `date_modif`, `user_modif`, `user_creation`, `supp`) VALUES
+(1, 'bbvgvghjjjkjk', 'En Cours', '2022/2023', '2022-04-04', '2023-04-06', '2022-04-22 01:19:07', NULL, NULL, 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `caisse`
+--
+
+CREATE TABLE `caisse` (
+  `id` int(11) NOT NULL,
+  `superviseur_id` int(11) NOT NULL,
+  `solde_fc` decimal(10,2) NOT NULL,
+  `solde_usd` decimal(10,2) NOT NULL,
+  `created_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
+  `nom` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `categorie`
+--
+
+CREATE TABLE `categorie` (
+  `id` int(11) NOT NULL,
+  `section` enum('Crèche','Maternelle','Primaire','Secondaire','Commerciale de Gestion','Litteraire','Scientifique','Electricité','Technique coupe et couture','Mécanique générale','Pédagogie Générale') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `option` enum('Crèche','Maternelle','Primaire','Secondaire','Commerciale de Gestion','Litteraire','Scientifique','Math Physique','Biochimie','Electricité','Technique coupe et couture','Mécanique générale','Pédagogie Générale','null') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nombreperiodes` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `categorie`
+--
+
+INSERT INTO `categorie` (`id`, `section`, `option`, `nombreperiodes`) VALUES
+(1, 'Crèche', 'Crèche', 1),
+(2, 'Maternelle', 'Maternelle', NULL),
+(3, 'Primaire', 'Primaire', NULL),
+(4, 'Secondaire', 'Secondaire', NULL),
+(5, 'Commerciale de Gestion', 'Commerciale de Gestion', NULL),
+(6, 'Litteraire', 'Litteraire', 10),
+(7, 'Scientifique', 'Scientifique', NULL),
+(8, 'Scientifique', 'Math Physique', NULL),
+(9, 'Scientifique', 'Biochimie', NULL),
+(10, 'Electricité', 'Electricité', NULL),
+(11, 'Technique coupe et couture', 'Technique coupe et couture', NULL),
+(12, 'Mécanique générale', 'Mécanique générale', NULL),
+(13, 'Pédagogie Générale', 'Pédagogie Générale', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `classe`
+--
+
+CREATE TABLE `classe` (
+  `id` int(11) NOT NULL,
+  `id_type_classe_id` int(11) NOT NULL,
+  `id_categorie_id` int(11) NOT NULL,
+  `id_niveaux_id` int(11) NOT NULL,
+  `libelle` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombreelevemax` int(11) NOT NULL,
+  `usercreation` int(11) NOT NULL,
+  `usermodif` int(11) DEFAULT NULL,
+  `datecreation` datetime NOT NULL,
+  `datemodif` datetime DEFAULT NULL,
+  `supp` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `classe`
+--
+
+INSERT INTO `classe` (`id`, `id_type_classe_id`, `id_categorie_id`, `id_niveaux_id`, `libelle`, `nombreelevemax`, `usercreation`, `usermodif`, `datecreation`, `datemodif`, `supp`) VALUES
+(8, 39, 1, 1, 'A', 10, 1, NULL, '2022-05-14 13:11:30', NULL, 0),
+(9, 38, 2, 1, 'A', 6, 1, NULL, '2022-05-14 13:12:00', NULL, 0),
+(10, 33, 3, 3, 'A', 14, 1, NULL, '2022-05-14 13:12:37', NULL, 0),
+(11, 29, 4, 7, ' A ', 13, 1, 1, '2022-05-14 13:13:11', '2022-05-14 14:30:09', 0),
+(12, 9, 6, 2, 'A', 15, 1, NULL, '2022-05-14 13:13:29', NULL, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cote_obtenue`
+--
+
+CREATE TABLE `cote_obtenue` (
+  `id` int(11) NOT NULL,
+  `cours_id` int(11) NOT NULL,
+  `affectation_id` int(11) NOT NULL,
+  `cote` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cours`
+--
+
+CREATE TABLE `cours` (
+  `id` int(11) NOT NULL,
+  `typeclasse_id` int(11) NOT NULL,
+  `nom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `usercreation` int(11) NOT NULL,
+  `usermodif` int(11) DEFAULT NULL,
+  `datecreation` datetime NOT NULL,
+  `datemodif` datetime DEFAULT NULL,
+  `supp` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `direction`
+--
+
+CREATE TABLE `direction` (
+  `id` int(11) NOT NULL,
+  `ecole_id` int(11) NOT NULL,
+  `libelle` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `usercreation` int(11) NOT NULL,
+  `usermodif` int(11) DEFAULT NULL,
+  `datecreation` datetime NOT NULL,
+  `datemodif` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `direction`
+--
+
+INSERT INTO `direction` (`id`, `ecole_id`, `libelle`, `usercreation`, `usermodif`, `datecreation`, `datemodif`) VALUES
+(1, 2, 'Direction generale', 1, 1, '2022-05-19 12:24:19', '2022-05-19 14:38:44');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `doctrine_migration_versions`
+--
+
+CREATE TABLE `doctrine_migration_versions` (
+  `version` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
+  `executed_at` datetime DEFAULT NULL,
+  `execution_time` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déchargement des données de la table `doctrine_migration_versions`
+--
+
+INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
+('DoctrineMigrations\\Version20220418144416', '2022-04-18 16:46:22', 21677),
+('DoctrineMigrations\\Version20220423083302', '2022-04-23 10:33:26', 12113),
+('DoctrineMigrations\\Version20220429162054', '2022-04-29 18:23:19', 5960),
+('DoctrineMigrations\\Version20220430190924', '2022-04-30 21:09:41', 2286),
+('DoctrineMigrations\\Version20220502083511', '2022-05-03 14:12:42', 2050),
+('DoctrineMigrations\\Version20220506113416', '2022-05-06 13:34:41', 7850),
+('DoctrineMigrations\\Version20220506113747', '2022-05-06 13:37:58', 1507),
+('DoctrineMigrations\\Version20220506133748', '2022-05-06 15:37:59', 3382),
+('DoctrineMigrations\\Version20220506231731', '2022-05-07 01:17:42', 2367),
+('DoctrineMigrations\\Version20220507101449', '2022-05-07 12:15:03', 1211),
+('DoctrineMigrations\\Version20220508203203', '2022-05-08 22:32:44', 5433),
+('DoctrineMigrations\\Version20220509075612', '2022-05-09 09:56:23', 598),
+('DoctrineMigrations\\Version20220509182021', '2022-05-09 20:20:37', 2060),
+('DoctrineMigrations\\Version20220511141329', '2022-05-11 16:34:25', 10445),
+('DoctrineMigrations\\Version20220518170614', '2022-05-18 19:06:28', 11976),
+('DoctrineMigrations\\Version20220518175855', '2022-05-18 19:59:09', 579),
+('DoctrineMigrations\\Version20220518182445', '2022-05-18 20:24:59', 632),
+('DoctrineMigrations\\Version20220518192852', '2022-05-18 21:29:08', 3911),
+('DoctrineMigrations\\Version20220519102352', '2022-05-19 12:24:05', 640),
+('DoctrineMigrations\\Version20220520151540', '2022-05-20 17:15:59', 2555),
+('DoctrineMigrations\\Version20220520154234', '2022-05-20 17:42:46', 1223),
+('DoctrineMigrations\\Version20220520210653', '2022-05-20 23:07:06', 481);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ecole`
+--
+
+CREATE TABLE `ecole` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `logo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `numero_telephone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `numero_adresse` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `avenue` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `quartier` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `commune` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ville` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `province` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `usercreation` int(11) NOT NULL,
+  `usermodif` int(11) DEFAULT NULL,
+  `datecreation` datetime NOT NULL,
+  `datemodif` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `ecole`
+--
+
+INSERT INTO `ecole` (`id`, `nom`, `logo`, `numero_telephone`, `email`, `numero_adresse`, `avenue`, `quartier`, `commune`, `ville`, `province`, `usercreation`, `usermodif`, `datecreation`, `datemodif`) VALUES
+(1, 'Kayembes', 'uploads/876861.jpg', '+243823281659', 'mekayembe@gmail.com', '21bis', 'Zaba', 'Mbanza_Lemba', 'Lemba', 'kinshasa', 'kinshasa', 1, 1, '2022-05-18 21:29:22', '2022-05-20 13:17:38'),
+(2, 'Kayembo', 'uploads/699662.png', '+243823281659', 'mekayembe@gmail.com', '21bis', 'Zaba', 'Mbanza_Lemba', 'Lemba', 'kinshasa', 'kinshasa', 1, 1, '2022-05-18 23:38:33', '2022-05-20 13:22:23');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `eleve`
+--
+
+CREATE TABLE `eleve` (
+  `id` int(11) NOT NULL,
+  `id_parent_id` int(11) NOT NULL,
+  `id_classe_id` int(11) DEFAULT NULL,
+  `nom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `post_nom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prenom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sexe` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nationalite` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `matricule` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_naissance` date NOT NULL,
+  `lieu_naissance` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `avenue` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `numero` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `quartier` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `commune` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ville` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `province` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `secteur_origine` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `territoire_origine` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `province_origine` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_enregistrement` datetime NOT NULL,
+  `usercreation` int(11) NOT NULL,
+  `usermodif` int(11) DEFAULT NULL,
+  `datemodif` datetime DEFAULT NULL,
+  `supp` tinyint(1) NOT NULL,
+  `imageeleve` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `grades`
+--
+
+CREATE TABLE `grades` (
+  `id` int(11) NOT NULL,
+  `libelle` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `next_grade` int(11) DEFAULT NULL,
+  `usercreation` int(11) NOT NULL,
+  `usermodif` int(11) DEFAULT NULL,
+  `datecreation` datetime NOT NULL,
+  `datemodif` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `grades`
+--
+
+INSERT INTO `grades` (`id`, `libelle`, `next_grade`, `usercreation`, `usermodif`, `datecreation`, `datemodif`) VALUES
+(11, 'Kayembes ', NULL, 1, 1, '2022-05-20 13:08:48', '2022-05-20 13:35:16'),
+(12, 'a', NULL, 1, NULL, '2022-05-21 22:02:00', NULL),
+(13, 'b', NULL, 1, NULL, '2022-05-21 22:02:15', NULL),
+(14, 'c', NULL, 1, NULL, '2022-05-21 22:02:25', NULL),
+(15, 'z', NULL, 1, NULL, '2022-05-21 22:02:48', NULL),
+(16, 'q', NULL, 1, NULL, '2022-05-21 22:02:56', NULL),
+(17, 't', NULL, 1, NULL, '2022-05-21 22:03:11', NULL),
+(18, 'u', NULL, 1, NULL, '2022-05-21 22:03:18', NULL),
+(19, 'i', NULL, 1, NULL, '2022-05-21 22:03:27', NULL),
+(20, 'x', NULL, 1, NULL, '2022-05-21 22:04:16', NULL),
+(21, 'bb', NULL, 1, NULL, '2022-05-21 22:04:24', NULL),
+(22, 'f', NULL, 1, NULL, '2022-05-21 22:04:32', NULL),
+(23, 'k', NULL, 1, NULL, '2022-05-21 22:04:40', NULL),
+(24, 'Mathematique', NULL, 1, NULL, '2022-05-21 22:04:55', NULL),
+(25, 'r', NULL, 1, NULL, '2022-05-21 22:05:02', NULL),
+(26, 'd', NULL, 1, NULL, '2022-05-21 22:05:11', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `inscription`
+--
+
+CREATE TABLE `inscription` (
+  `id` int(11) NOT NULL,
+  `id_eleve_id` int(11) NOT NULL,
+  `id_type_classe_id` int(11) NOT NULL,
+  `type` enum('Ancien','Nouveau','Quitter','Finir') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `anneescolaire` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `affecter` tinyint(1) NOT NULL,
+  `valider` tinyint(1) NOT NULL,
+  `ecoleprovenance` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `documentreference` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `usercreation` int(11) NOT NULL,
+  `usermodif` int(11) DEFAULT NULL,
+  `datecreation` datetime NOT NULL,
+  `datemodif` datetime DEFAULT NULL,
+  `supp` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `maxima`
+--
+
+CREATE TABLE `maxima` (
+  `id` int(11) NOT NULL,
+  `cours_id` int(11) NOT NULL,
+  `valeur` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `menu`
+--
+
+CREATE TABLE `menu` (
+  `id` int(11) NOT NULL,
+  `lien` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `menu` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `profil` int(11) NOT NULL,
+  `modif` tinyint(1) NOT NULL,
+  `supp` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `menu_profil`
+--
+
+CREATE TABLE `menu_profil` (
+  `menu_id` int(11) NOT NULL,
+  `profil_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `niveaux`
+--
+
+CREATE TABLE `niveaux` (
+  `id` int(11) NOT NULL,
+  `libelle` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `niveaux`
+--
+
+INSERT INTO `niveaux` (`id`, `libelle`) VALUES
+(1, '1'),
+(2, '2'),
+(3, '3'),
+(4, '4'),
+(5, '5'),
+(6, '6'),
+(7, '7'),
+(8, '8');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `operation_caisse`
+--
+
+CREATE TABLE `operation_caisse` (
+  `id` int(11) NOT NULL,
+  `montant_usd` decimal(10,2) NOT NULL,
+  `montant_fc` decimal(10,2) NOT NULL,
+  `montant_rendu_usd` decimal(10,2) NOT NULL,
+  `montant_rendu_fc` decimal(10,2) NOT NULL,
+  `date_operation` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `paiement`
+--
+
+CREATE TABLE `paiement` (
+  `id` int(11) NOT NULL,
+  `tarification_id` int(11) NOT NULL,
+  `eleve_id` int(11) NOT NULL,
+  `detail` enum('Accompte Premier Trimestre','Solde Premier Trimestre','Accompte Deuxième Trimèstre','Solde Deuxième Trimèstre','Accompte Troisème Trimestre','Solde Troisième Trimestre') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `montant_usd` decimal(10,2) DEFAULT NULL,
+  `montant_fc` decimal(10,2) DEFAULT NULL,
+  `taux` decimal(10,2) NOT NULL,
+  `montant_rendu_usd` decimal(10,2) DEFAULT NULL,
+  `montant_rendu_fc` decimal(10,2) DEFAULT NULL,
+  `preuve_de_paiement` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `parent_eleve`
+--
+
+CREATE TABLE `parent_eleve` (
+  `id` int(11) NOT NULL,
+  `nom_tuteur` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `post_nom_tuteur` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prenom_tuteur` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nom_remplacement` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prenom_remplacement` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `numero_telephone_tuteur` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `numero_telephone_remplacement` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `adresse_tuteur` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `adresse_remplacement` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `usercreation` int(11) NOT NULL,
+  `usermodif` int(11) DEFAULT NULL,
+  `datecreation` datetime NOT NULL,
+  `datemodif` datetime DEFAULT NULL,
+  `supp` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `parent_eleve`
+--
+
+INSERT INTO `parent_eleve` (`id`, `nom_tuteur`, `post_nom_tuteur`, `prenom_tuteur`, `nom_remplacement`, `prenom_remplacement`, `numero_telephone_tuteur`, `numero_telephone_remplacement`, `adresse_tuteur`, `adresse_remplacement`, `usercreation`, `usermodif`, `datecreation`, `datemodif`, `supp`) VALUES
+(9, 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'ca', 'cv', 1, 1, '2022-04-22 23:42:34', '2022-04-26 16:37:44', 0),
+(11, 'z', 'z', 'z', 'z', 'z', 'z', 'zz', 'z', 'z', 1, NULL, '2022-04-23 13:03:30', NULL, 0),
+(12, 'm', 'n', 'a', 'm', 't', '6', '8', 'm', 'm', 1, NULL, '2022-04-23 20:55:27', NULL, 0),
+(13, 'Mulumba', 'Nkuadi', 'Apollinaire', 'Mbelu', 'Therese', '+243823281659', '+243823281659', '21bis\r\nZaba\r\nMbanza_Lemba', '21bis\r\nZaba\r\nMbanza_Lemba', 1, NULL, '2022-04-29 10:21:55', NULL, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `periodes`
+--
+
+CREATE TABLE `periodes` (
+  `id` int(11) NOT NULL,
+  `libelle` int(11) NOT NULL,
+  `nextperiodes` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `periodes`
+--
+
+INSERT INTO `periodes` (`id`, `libelle`, `nextperiodes`) VALUES
+(1, 15, 0),
+(2, 14, 1),
+(3, 13, 2),
+(4, 12, 3),
+(5, 11, 4),
+(6, 10, 5),
+(7, 9, 6),
+(8, 8, 7),
+(9, 7, 8),
+(10, 6, 9),
+(11, 5, 10),
+(12, 4, 11),
+(13, 3, 12),
+(14, 2, 13),
+(15, 1, 14);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `presences`
+--
+
+CREATE TABLE `presences` (
+  `id` int(11) NOT NULL,
+  `agentaffectation_id` int(11) NOT NULL,
+  `datearrive` datetime NOT NULL,
+  `datesortie` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `profil`
+--
+
+CREATE TABLE `profil` (
+  `id` int(11) NOT NULL,
+  `profil` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `nouveau` tinyint(1) NOT NULL,
+  `admin_user` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_enregistrement` datetime NOT NULL,
+  `modif` tinyint(1) NOT NULL,
+  `supp` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `session_caisse`
+--
+
+CREATE TABLE `session_caisse` (
+  `id` int(11) NOT NULL,
+  `caisse_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `date_debut` datetime NOT NULL,
+  `date_cloture` datetime DEFAULT NULL,
+  `solde_ouverture_usd` decimal(10,2) NOT NULL,
+  `solde_ouverture_fc` decimal(10,2) NOT NULL,
+  `solde_cloture_usd` decimal(10,2) DEFAULT NULL,
+  `solde_cloture_fc` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `tarification`
+--
+
+CREATE TABLE `tarification` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `solde_premier_trimestre_usd` decimal(10,2) NOT NULL,
+  `accompte_premier_trimestre_usd` decimal(10,2) NOT NULL,
+  `solde_second_trimestre_usd` decimal(10,2) NOT NULL,
+  `accompte_second_trimestre_usd` decimal(10,2) NOT NULL,
+  `solde_troisieme_trimestre_usd` decimal(10,2) NOT NULL,
+  `accompte_troisieme_trimestre_usd` decimal(10,2) NOT NULL,
+  `section` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '(DC2Type:json)',
+  `is_paiement_direct` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `type_absence`
+--
+
+CREATE TABLE `type_absence` (
+  `id` int(11) NOT NULL,
+  `libelle` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `type_classe`
+--
+
+CREATE TABLE `type_classe` (
+  `id` int(11) NOT NULL,
+  `id_categorie_id` int(11) NOT NULL,
+  `id_niveau_id` int(11) NOT NULL,
+  `next_type_classe` longtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:json)'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `type_classe`
+--
+
+INSERT INTO `type_classe` (`id`, `id_categorie_id`, `id_niveau_id`, `next_type_classe`) VALUES
+(1, 6, 4, ''),
+(2, 5, 4, ''),
+(3, 13, 4, ''),
+(4, 12, 4, ''),
+(5, 11, 4, ''),
+(6, 8, 4, ''),
+(7, 9, 4, ''),
+(8, 6, 3, '[1]'),
+(9, 6, 2, '[8]'),
+(10, 6, 1, '[9]'),
+(11, 5, 3, '[2]'),
+(12, 5, 2, '[11]'),
+(13, 5, 1, '[12]'),
+(14, 13, 3, '[3]'),
+(15, 13, 2, '[14]'),
+(16, 13, 1, '[15]'),
+(17, 12, 3, '[4]'),
+(18, 12, 2, '[17]'),
+(19, 12, 1, '[18]'),
+(20, 11, 3, '[5]'),
+(21, 11, 2, '[20]'),
+(22, 11, 1, '[21]'),
+(23, 8, 3, '[6]'),
+(24, 9, 3, '[7]'),
+(25, 7, 2, '[23,24]'),
+(26, 7, 1, '[25]'),
+(28, 4, 8, '[10,13,16,19,22,26,43]'),
+(29, 4, 7, '[28]'),
+(30, 3, 6, '[29]'),
+(31, 3, 5, '[30]'),
+(32, 3, 4, '[31]'),
+(33, 3, 3, '[32]'),
+(34, 3, 2, '[33]'),
+(35, 3, 1, '[34]'),
+(36, 2, 3, '[35]'),
+(37, 2, 2, '[36]'),
+(38, 2, 1, '[37]'),
+(39, 1, 1, '[38]'),
+(40, 10, 4, ''),
+(41, 10, 3, '[40]'),
+(42, 10, 2, '[41]'),
+(43, 10, 1, '[42]');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `agents_id` int(11) NOT NULL,
+  `email` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `roles` longtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:json)',
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_creation` datetime NOT NULL,
+  `date_modif` datetime DEFAULT NULL,
+  `user_modif` int(11) DEFAULT NULL,
+  `user_creation` int(11) DEFAULT NULL,
+  `supp` tinyint(1) NOT NULL,
+  `profil` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `user`
+--
+
+INSERT INTO `user` (`id`, `agents_id`, `email`, `roles`, `password`, `date_creation`, `date_modif`, `user_modif`, `user_creation`, `supp`, `profil`) VALUES
+(1, 1, 'test@test.com', '[\"ROLE_Admin\",\"ROLE_Inscription\",\"ROLE_Paiement\",\"ROLE_InfosEleve\"]', '$2y$13$7r.ao99nneiSNSIQVaZwO.btqUReJXlhRP193YPKIJi84m9fEel8q', '2022-04-18 16:50:59', NULL, NULL, NULL, 0, 'ROLE_ADMIN'),
+(2, 2, 'test@test12.com', '[\"ROLE_inscription\",\"ROLE_affectation\",\"ROLE_finance\",\"ROLE_approbation\",\"ROLE_gestion_eleve\",\"ROLE_scolarite\",\"ROLE_periode\",\"ROLE_cour\",\"ROLE_bullettin\",\"ROLE_configuration\",\"ROLE_gestion_annee\",\"ROLE_gestion_classe\",\"ROLE_gestion_utilisateur\",\"ROLE_gestion_personnel\"]', '$2y$13$JT.j5n1CLj7RrDudjhf6D.5qwEXZ8g776YhseGsWsOFUa850xPInm', '2022-05-14 19:56:30', '2022-05-14 19:56:30', 1, 1, 1, 'Prefet'),
+(3, 2, 'test@test1.com', '[\"ROLE_inscription\",\"ROLE_affectation\",\"ROLE_finance\",\"ROLE_approbation\",\"ROLE_gestion_eleve\",\"ROLE_scolarite\",\"ROLE_periode\",\"ROLE_cour\",\"ROLE_bullettin\",\"ROLE_configuration\",\"ROLE_gestion_annee\",\"ROLE_gestion_classe\",\"ROLE_gestion_utilisateur\",\"ROLE_gestion_personnel\",\"ROLE_admin\"]', '$2y$13$S2MCBufThwFFYjc63sc.cuu.PjVZIbBwg5guPOuLjQTX7cOI.CEBu', '2022-05-16 19:47:18', NULL, NULL, 1, 1, 'DG'),
+(5, 2, 'test@test4.com', '[\"ROLE_inscription\",\"ROLE_affectation\",\"ROLE_finance\",\"ROLE_approbation\",\"ROLE_gestion_eleve\",\"ROLE_scolarite\",\"ROLE_periode\",\"ROLE_cour\",\"ROLE_bullettin\",\"ROLE_configuration\",\"ROLE_gestion_annee\",\"ROLE_gestion_classe\",\"ROLE_gestion_utilisateur\",\"ROLE_gestion_personnel\",\"ROLE_admin\"]', '$2y$13$8LsvytCFksySaNb.LPklIuCL0RqJRuijtumKf9p9C0IbL0SMMIop6', '2022-05-16 20:10:04', NULL, NULL, 1, 1, 'admin'),
+(6, 2, 'test@test18.com', '[\"ROLE_inscription\",\"ROLE_affectation\",\"ROLE_finance\",\"ROLE_approbation\",\"ROLE_gestion_eleve\",\"ROLE_scolarite\",\"ROLE_periode\",\"ROLE_cour\",\"ROLE_bullettin\",\"ROLE_configuration\",\"ROLE_gestion_annee\",\"ROLE_gestion_classe\",\"ROLE_gestion_utilisateur\",\"ROLE_gestion_personnel\",\"ROLE_admin\"]', '$2y$13$bLByYLec7g8xXb82Iiby5u2H6nl4V7Wt3xBPQVvqBfq3d6tyF32Sq', '2022-05-16 20:36:54', '2022-05-17 20:09:50', 1, 1, 0, 'admin');
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `absences`
+--
+ALTER TABLE `absences`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_F9C0EFFFCE9AADBB` (`agentaffectation_id`),
+  ADD KEY `IDX_F9C0EFFFE413FAEA` (`typeabsences_id`);
+
+--
+-- Index pour la table `acces_caisse`
+--
+ALTER TABLE `acces_caisse`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_D91390EF3414710B` (`agent_id`);
+
+--
+-- Index pour la table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `affectation`
+--
+ALTER TABLE `affectation`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_F4DD61D35AB72B27` (`id_eleve_id`),
+  ADD KEY `IDX_F4DD61D3F6B192E` (`id_classe_id`),
+  ADD KEY `IDX_F4DD61D36206AF56` (`id_annee_scolaire_id`);
+
+--
+-- Index pour la table `agent`
+--
+ALTER TABLE `agent`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `agent_affectation`
+--
+ALTER TABLE `agent_affectation`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_64133A93AF73D997` (`direction_id`),
+  ADD KEY `IDX_64133A933414710B` (`agent_id`),
+  ADD KEY `IDX_64133A933F828F5E` (`grades_id`);
+
+--
+-- Index pour la table `annee_scolaire`
+--
+ALTER TABLE `annee_scolaire`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `caisse`
+--
+ALTER TABLE `caisse`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_B2A353C8B7BB80FF` (`superviseur_id`);
+
+--
+-- Index pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `classe`
+--
+ALTER TABLE `classe`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_8F87BF966FE591F` (`id_type_classe_id`),
+  ADD KEY `IDX_8F87BF969F34925F` (`id_categorie_id`),
+  ADD KEY `IDX_8F87BF96F4E37D9` (`id_niveaux_id`);
+
+--
+-- Index pour la table `cote_obtenue`
+--
+ALTER TABLE `cote_obtenue`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_97D437277ECF78B0` (`cours_id`),
+  ADD KEY `IDX_97D437276D0ABA22` (`affectation_id`);
+
+--
+-- Index pour la table `cours`
+--
+ALTER TABLE `cours`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_FDCA8C9C6C61C795` (`typeclasse_id`);
+
+--
+-- Index pour la table `direction`
+--
+ALTER TABLE `direction`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_3E4AD1B377EF1B1E` (`ecole_id`);
+
+--
+-- Index pour la table `doctrine_migration_versions`
+--
+ALTER TABLE `doctrine_migration_versions`
+  ADD PRIMARY KEY (`version`);
+
+--
+-- Index pour la table `ecole`
+--
+ALTER TABLE `ecole`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `eleve`
+--
+ALTER TABLE `eleve`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UNIQ_ECA105F712B2DC9C` (`matricule`),
+  ADD KEY `IDX_ECA105F7F24F7657` (`id_parent_id`),
+  ADD KEY `IDX_ECA105F7F6B192E` (`id_classe_id`);
+
+--
+-- Index pour la table `grades`
+--
+ALTER TABLE `grades`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `inscription`
+--
+ALTER TABLE `inscription`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_5E90F6D65AB72B27` (`id_eleve_id`),
+  ADD KEY `IDX_5E90F6D66FE591F` (`id_type_classe_id`);
+
+--
+-- Index pour la table `maxima`
+--
+ALTER TABLE `maxima`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_A291DF227ECF78B0` (`cours_id`);
+
+--
+-- Index pour la table `menu`
+--
+ALTER TABLE `menu`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `menu_profil`
+--
+ALTER TABLE `menu_profil`
+  ADD PRIMARY KEY (`menu_id`,`profil_id`),
+  ADD KEY `IDX_3591EA4FCCD7E912` (`menu_id`),
+  ADD KEY `IDX_3591EA4F275ED078` (`profil_id`);
+
+--
+-- Index pour la table `niveaux`
+--
+ALTER TABLE `niveaux`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `operation_caisse`
+--
+ALTER TABLE `operation_caisse`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `paiement`
+--
+ALTER TABLE `paiement`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_B1DC7A1EA709F580` (`tarification_id`),
+  ADD KEY `IDX_B1DC7A1EA6CC7B2` (`eleve_id`);
+
+--
+-- Index pour la table `parent_eleve`
+--
+ALTER TABLE `parent_eleve`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `periodes`
+--
+ALTER TABLE `periodes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `presences`
+--
+ALTER TABLE `presences`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_BDDBEFABCE9AADBB` (`agentaffectation_id`);
+
+--
+-- Index pour la table `profil`
+--
+ALTER TABLE `profil`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `session_caisse`
+--
+ALTER TABLE `session_caisse`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_DDC8599127B4FEBF` (`caisse_id`),
+  ADD KEY `IDX_DDC85991A76ED395` (`user_id`);
+
+--
+-- Index pour la table `tarification`
+--
+ALTER TABLE `tarification`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `type_absence`
+--
+ALTER TABLE `type_absence`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `type_classe`
+--
+ALTER TABLE `type_classe`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_AC50D4AE9F34925F` (`id_categorie_id`),
+  ADD KEY `IDX_AC50D4AE8B0B20A6` (`id_niveau_id`);
+
+--
+-- Index pour la table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`),
+  ADD KEY `IDX_8D93D649709770DC` (`agents_id`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `absences`
+--
+ALTER TABLE `absences`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `acces_caisse`
+--
+ALTER TABLE `acces_caisse`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `affectation`
+--
+ALTER TABLE `affectation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT pour la table `agent`
+--
+ALTER TABLE `agent`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pour la table `agent_affectation`
+--
+ALTER TABLE `agent_affectation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `annee_scolaire`
+--
+ALTER TABLE `annee_scolaire`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `caisse`
+--
+ALTER TABLE `caisse`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT pour la table `classe`
+--
+ALTER TABLE `classe`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT pour la table `cote_obtenue`
+--
+ALTER TABLE `cote_obtenue`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `cours`
+--
+ALTER TABLE `cours`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT pour la table `direction`
+--
+ALTER TABLE `direction`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `ecole`
+--
+ALTER TABLE `ecole`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT pour la table `eleve`
+--
+ALTER TABLE `eleve`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT pour la table `grades`
+--
+ALTER TABLE `grades`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT pour la table `inscription`
+--
+ALTER TABLE `inscription`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT pour la table `maxima`
+--
+ALTER TABLE `maxima`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
+--
+-- AUTO_INCREMENT pour la table `menu`
+--
+ALTER TABLE `menu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `niveaux`
+--
+ALTER TABLE `niveaux`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT pour la table `operation_caisse`
+--
+ALTER TABLE `operation_caisse`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `paiement`
+--
+ALTER TABLE `paiement`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `parent_eleve`
+--
+ALTER TABLE `parent_eleve`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT pour la table `periodes`
+--
+ALTER TABLE `periodes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT pour la table `presences`
+--
+ALTER TABLE `presences`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `profil`
+--
+ALTER TABLE `profil`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `session_caisse`
+--
+ALTER TABLE `session_caisse`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `tarification`
+--
+ALTER TABLE `tarification`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `type_absence`
+--
+ALTER TABLE `type_absence`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `type_classe`
+--
+ALTER TABLE `type_classe`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT pour la table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `absences`
+--
+ALTER TABLE `absences`
+  ADD CONSTRAINT `FK_F9C0EFFFCE9AADBB` FOREIGN KEY (`agentaffectation_id`) REFERENCES `agent_affectation` (`id`),
+  ADD CONSTRAINT `FK_F9C0EFFFE413FAEA` FOREIGN KEY (`typeabsences_id`) REFERENCES `type_absence` (`id`);
+
+--
+-- Contraintes pour la table `acces_caisse`
+--
+ALTER TABLE `acces_caisse`
+  ADD CONSTRAINT `FK_D91390EF3414710B` FOREIGN KEY (`agent_id`) REFERENCES `agent` (`id`);
+
+--
+-- Contraintes pour la table `affectation`
+--
+ALTER TABLE `affectation`
+  ADD CONSTRAINT `FK_F4DD61D35AB72B27` FOREIGN KEY (`id_eleve_id`) REFERENCES `eleve` (`id`),
+  ADD CONSTRAINT `FK_F4DD61D36206AF56` FOREIGN KEY (`id_annee_scolaire_id`) REFERENCES `annee_scolaire` (`id`),
+  ADD CONSTRAINT `FK_F4DD61D3F6B192E` FOREIGN KEY (`id_classe_id`) REFERENCES `classe` (`id`);
+
+--
+-- Contraintes pour la table `agent_affectation`
+--
+ALTER TABLE `agent_affectation`
+  ADD CONSTRAINT `FK_64133A933414710B` FOREIGN KEY (`agent_id`) REFERENCES `agent` (`id`),
+  ADD CONSTRAINT `FK_64133A933F828F5E` FOREIGN KEY (`grades_id`) REFERENCES `grades` (`id`),
+  ADD CONSTRAINT `FK_64133A93AF73D997` FOREIGN KEY (`direction_id`) REFERENCES `direction` (`id`);
+
+--
+-- Contraintes pour la table `caisse`
+--
+ALTER TABLE `caisse`
+  ADD CONSTRAINT `FK_B2A353C8B7BB80FF` FOREIGN KEY (`superviseur_id`) REFERENCES `user` (`id`);
+
+--
+-- Contraintes pour la table `classe`
+--
+ALTER TABLE `classe`
+  ADD CONSTRAINT `FK_8F87BF966FE591F` FOREIGN KEY (`id_type_classe_id`) REFERENCES `type_classe` (`id`),
+  ADD CONSTRAINT `FK_8F87BF969F34925F` FOREIGN KEY (`id_categorie_id`) REFERENCES `categorie` (`id`),
+  ADD CONSTRAINT `FK_8F87BF96F4E37D9` FOREIGN KEY (`id_niveaux_id`) REFERENCES `niveaux` (`id`);
+
+--
+-- Contraintes pour la table `cote_obtenue`
+--
+ALTER TABLE `cote_obtenue`
+  ADD CONSTRAINT `FK_97D437276D0ABA22` FOREIGN KEY (`affectation_id`) REFERENCES `affectation` (`id`),
+  ADD CONSTRAINT `FK_97D437277ECF78B0` FOREIGN KEY (`cours_id`) REFERENCES `cours` (`id`);
+
+--
+-- Contraintes pour la table `cours`
+--
+ALTER TABLE `cours`
+  ADD CONSTRAINT `FK_FDCA8C9C6C61C795` FOREIGN KEY (`typeclasse_id`) REFERENCES `type_classe` (`id`);
+
+--
+-- Contraintes pour la table `direction`
+--
+ALTER TABLE `direction`
+  ADD CONSTRAINT `FK_3E4AD1B377EF1B1E` FOREIGN KEY (`ecole_id`) REFERENCES `ecole` (`id`);
+
+--
+-- Contraintes pour la table `eleve`
+--
+ALTER TABLE `eleve`
+  ADD CONSTRAINT `FK_ECA105F7F24F7657` FOREIGN KEY (`id_parent_id`) REFERENCES `parent_eleve` (`id`),
+  ADD CONSTRAINT `FK_ECA105F7F6B192E` FOREIGN KEY (`id_classe_id`) REFERENCES `classe` (`id`);
+
+--
+-- Contraintes pour la table `inscription`
+--
+ALTER TABLE `inscription`
+  ADD CONSTRAINT `FK_5E90F6D65AB72B27` FOREIGN KEY (`id_eleve_id`) REFERENCES `eleve` (`id`),
+  ADD CONSTRAINT `FK_5E90F6D66FE591F` FOREIGN KEY (`id_type_classe_id`) REFERENCES `type_classe` (`id`);
+
+--
+-- Contraintes pour la table `maxima`
+--
+ALTER TABLE `maxima`
+  ADD CONSTRAINT `FK_A291DF227ECF78B0` FOREIGN KEY (`cours_id`) REFERENCES `cours` (`id`);
+
+--
+-- Contraintes pour la table `menu_profil`
+--
+ALTER TABLE `menu_profil`
+  ADD CONSTRAINT `FK_3591EA4F275ED078` FOREIGN KEY (`profil_id`) REFERENCES `profil` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_3591EA4FCCD7E912` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `paiement`
+--
+ALTER TABLE `paiement`
+  ADD CONSTRAINT `FK_B1DC7A1EA6CC7B2` FOREIGN KEY (`eleve_id`) REFERENCES `eleve` (`id`),
+  ADD CONSTRAINT `FK_B1DC7A1EA709F580` FOREIGN KEY (`tarification_id`) REFERENCES `tarification` (`id`);
+
+--
+-- Contraintes pour la table `presences`
+--
+ALTER TABLE `presences`
+  ADD CONSTRAINT `FK_BDDBEFABCE9AADBB` FOREIGN KEY (`agentaffectation_id`) REFERENCES `agent_affectation` (`id`);
+
+--
+-- Contraintes pour la table `session_caisse`
+--
+ALTER TABLE `session_caisse`
+  ADD CONSTRAINT `FK_DDC8599127B4FEBF` FOREIGN KEY (`caisse_id`) REFERENCES `caisse` (`id`),
+  ADD CONSTRAINT `FK_DDC85991A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+--
+-- Contraintes pour la table `type_classe`
+--
+ALTER TABLE `type_classe`
+  ADD CONSTRAINT `FK_AC50D4AE8B0B20A6` FOREIGN KEY (`id_niveau_id`) REFERENCES `niveaux` (`id`),
+  ADD CONSTRAINT `FK_AC50D4AE9F34925F` FOREIGN KEY (`id_categorie_id`) REFERENCES `categorie` (`id`);
+
+--
+-- Contraintes pour la table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `FK_8D93D649709770DC` FOREIGN KEY (`agents_id`) REFERENCES `agent` (`id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
