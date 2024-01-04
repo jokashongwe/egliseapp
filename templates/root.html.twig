@@ -43,7 +43,7 @@
 							</a>
 							<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 								<li>
-									<a href="" class="nav-link">Accueil</a>
+									<a href="{{path('Partage')}}" class="nav-link">Accueil</a>
 								</li>
 
 								<li>
@@ -73,6 +73,50 @@
 									<a class="dropdown-item" href="">Modication d'un Membre</a>
 								</li>
 
+							</ul>
+						</li>
+
+
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+								Finances
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+
+								<li>
+									<a class="dropdown-item" href="">Caisses</a>
+								</li>
+
+								<li>
+									<a class="dropdown-item" href="">Indicateur Caisse</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="">Infos Sur le Paiement</a>
+								</li>
+							</ul>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+								Gestion d'anniversaire
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+								<li>
+									<a class="dropdown-item" href="{{path('anniversaire_today')}}">Anniversaire</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="#">Programme d'anniversaire<i class="fa-solid fa-caret-right"></i>
+									</a>
+									<ul class="dropdown-menu dropdown-submenu">
+										<li>
+											<a class="dropdown-item" href="{{path('anniversaire_Recherche_Jour')}}">Recherche Journaliere</a>
+										</li>
+										<li>
+											<a class="dropdown-item" href="{{path('anniversaire_Recherche_Mois')}}">Recherche Mensuelle</a>
+										</li>
+
+									</ul>
+								</li>
 							</li>
 						</li>
 					</ul>
@@ -80,77 +124,151 @@
 
 
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-						Finances
-					</a>
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">Configuration de l'eglise</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 
+						<li>
+							<a class="dropdown-item" href="#">Ouvriers<i class="fa-solid fa-caret-right"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-submenu">
+								<li>
+									<a class="dropdown-item" href="">Statistique</a>
+								</li>
 
+							</ul>
+						</li>
 						<li>
-							<a class="dropdown-item" href="">Caisses</a>
+							<a class="dropdown-item" href="#">Departement<i class="fa-solid fa-caret-right"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-submenu">
+								<li>
+									<a class="dropdown-item" href="">Creation Departement</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="">Modication Departement</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="">Suppression Departement</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="">Liste Departement</a>
+								</li>
+
+							</ul>
+						</li>
+						<li>
+							<a class="dropdown-item" href="#">Sous-Departement<i class="fa-solid fa-caret-right"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-submenu">
+								<li>
+									<a class="dropdown-item" href="">Creation Sous-Departement</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="">Modication Sous-Departement</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="">Suppression Sous-Departementt</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="">Liste Sous-Departement</a>
+								</li>
+
+							</ul>
+						</li>
+						<li>
+							<a class="dropdown-item" href="#">Utilisateurs<i class="fa-solid fa-caret-right"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-submenu">
+								<li>
+									<a class="dropdown-item" href="">Creation Utilisateur</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="">Modification Utilisateur</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="">Supprimer Utilisateur</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="">liste Utilisateur</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a class="dropdown-item" href="#">Administrateur<i class="fa-solid fa-caret-right"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-submenu">
+								<li>
+									<a class="dropdown-item" href="">Creation Administrateur</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="">Modification Administrateur</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="">Liste utilisateurs</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a class="dropdown-item" href="">Cas de décès</a>
 						</li>
 
-						<li>
-							<a class="dropdown-item" href="">Indicateur Caisse</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="">Infos Sur le Paiement</a>
-						</li>
-					</li>
+					</ul>
 				</li>
+
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+						Gestion de cultes
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<li>
+							<a class="dropdown-item" href="">Culte</a>
+						</li>
+
+						<li>
+							<a class="dropdown-item" href="">Rapport</a>
+						</li>
+					</ul>
+				</li>
+
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+						SMS
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<li>
+							<a class="dropdown-item" href="">Envoi Sms</a>
+						</li>
+
+						<li>
+							<a class="dropdown-item" href="">Envoi à tous</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="">Envoi Categorie</a>
+						</li>
+					</ul>
+				</li>
+
+
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+						Evenements
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<li>
+							<a class="dropdown-item" href="">Mariage</a>
+						</li>
+
+						<li>
+							<a class="dropdown-item" href="">Convention et seminaire</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="">Autres</a>
+						</li>
+					</ul>
+				</li>
+
+
 			</ul>
-		</li>
-
-
+		</div>
 	</body>
-</html>
-<li class="nav-item dropdown">
-	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">Configuration de l'eglise</a>
-	<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-		<li>
-			<a class="dropdown-item" href="#">Utilisateurs<i class="fa-solid fa-caret-right"></i>
-			</a>
-			<ul class="dropdown-menu dropdown-submenu">
-				<li>
-					<a class="dropdown-item" href="">Creation Utilisateur</a>
-				</li>
-				<li>
-					<a class="dropdown-item" href="">Modification Utilisateur</a>
-				</li>
-				<li>
-					<a class="dropdown-item" href="">Supprimer Utilisateur</a>
-				</li>
-				<li>
-					<a class="dropdown-item" href="">liste Utilisateur</a>
-				</li>
-			</ul>
-		</li>
-		<li>
-			<a class="dropdown-item" href="#">Administrateur<i class="fa-solid fa-caret-right"></i>
-			</a>
-			<ul class="dropdown-menu dropdown-submenu">
-				<li>
-					<a class="dropdown-item" href="">Creation Administrateur</a>
-				</li>
-				<li>
-					<a class="dropdown-item" href="">Modification Administrateur</a>
-				</li>
-				<li>
-					<a class="dropdown-item" href="">Liste utilisateurs</a>
-				</li>
-			</ul>
-		</li>
-		<li>
-			<a class="dropdown-item" href="#">Sms<i class="fa-solid fa-caret-right"></i>
-			</a>
-			<ul class="dropdown-menu dropdown-submenu">
-				<li>
-					<a class="dropdown-item" href="">Envoie Sms</a>
-				</li>
-				<li>
-					<a class="dropdown-item" href="">Envoie Personnel</a>
-				</li>
-			</ul>
-		</li>{#<li>
-					</li>#}</li>
-</li></ul></li></ul></li></ul></li></html></body></html> </body></html></ul></div></body></html></div></nav>{% block body %}{% endblock %}{% for message in app.flashes('danger') %}<div class="alert alert-danger">{{ message }}</div>{% endfor %}<!-- MDB --><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="{{ asset('login/js/jquery.min.js') }}"></script>{% block javascripts %}{% endblock %}</body></html></body></html>
+</html></div></nav></body></html>{% block body %}{% endblock %}{% for message in app.flashes('danger') %}<div class="alert alert-danger">{{ message }}</div>{% endfor %}<!-- MDB --><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="{{ asset('login/js/jquery.min.js') }}"></script>{% block javascripts %}{% endblock %}</body></html>

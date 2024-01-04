@@ -1,20 +1,191 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello PartageController!{% endblock %}
-
+{% extends "root.html.twig" %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+	<style>
+		#chart01 {
+			height: 35vh;
+		}
+		#chart02 {
+			height: 35vh;
+		}
+	</style>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'F:/Projet programmation/projet eglise/egliseapp/src/Controller/PartageController.php'|file_link(0) }}">src/Controller/PartageController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'F:/Projet programmation/projet eglise/egliseapp/templates/partage/index.html.twig'|file_link(0) }}">templates/partage/index.html.twig</a></code></li>
-    </ul>
-</div>
-{% endblock %}
+	<div class="container">
+		<div class="row">
+			<div class="row mb-3">
+				<div class="col-md-1 col-sm-12">
+					<img src="{{ asset('image/trinite.jpg') }}" style="height: 105px">
+				</div>
+				<div class="col-md-10 pt-3 col-sm-12"></div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md col-sm-12">
+				<div class="card bg-success">
+					<div class="card-body">
+						<h5 class="card-title text-white">Membres</h5>
+						<div class="row">
+							<div class="col-md">
+								<i class="fa-solid fa-user-graduate text-white" style="font-size: 40px"></i>
+							</div>
+							<div class="col-md">
+								<h2 class="text-white">{{nMembre| last}}</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md col-sm-12">
+				<div class="card bg-primary">
+					<div class="card-body">
+						<h5 class="card-title text-white">Personnels</h5>
+						<div class="row">
+							<div class="col-md">
+								<i class="fa-solid fa-users-gear text-white" style="font-size: 40px"></i>
+							</div>
+							<div class="col-md">
+								<h2 class="text-white"></h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md col-sm-12">
+				<div class="card bg-warning">
+					<div class="card-body">
+						<h5 class="card-title text-white">Comptes</h5>
+						<div class="row">
+							<div class="col-md">
+								<i class="fa-solid fa-wallet text-white" style="font-size: 40px"></i>
+							</div>
+							<div class="col-md">
+								<h2 class="text-white">0</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="row m-3">
+			<div class="col-md">
+				<div id="chart01">
+					<canvas id="mChart01"></canvas>
+				</div>
+			</div>
+			<div class="col-md">
+				<div id="chart02">
+					<canvas id="mChart02"></canvas>
+				</div>
+			</div>
+		</div>
+		<div class="row m-3">
+			<h5 class="">Recherche Membre</h5>
+			<form action="{{ path('Partage') }}" method="POST">
+				<div class="row p-3">
+
+					<div class="col-md-5">
+						<div class="form-outline">
+							<input type="text" id="form12" class="form-control" name="cherche"/>
+							<label class="form-label" for="form12">Nom</label>
+						</div>
+					</div>
+					<div class="col-md-7 float-left">
+						<button class="btn btn-info">Rechercher</button>
+					</div>
+				</div>
+			</form>
+			<table class="table table-bordered">
+				<caption>Résultats</caption>
+
+				<tr>
+					<th scope="col">Nom</th>
+					<th scope="col">Postnom</th>
+					<th scope="col">Prénom</th>
+					<th scope="col">Date de naissance</th>
+					<th scope="col">Departement</th>
+
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+
+					<td></td>
+
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+
+</div>{% endblock %}{% block javascripts %}
+
+<script>
+	const data01 = {
+labels: [
+'Femmes', 'Hommes',
+],
+datasets: [
+{
+label: 'Chart01',
+data: [{% for nMembre in  nMembreParSexe %}{{ nMembre.Nbr }},{% endfor %}],
+backgroundColor: [
+'rgb(255, 99, 132)', 'rgb(54, 162, 235)',
+],
+hoverOffset: 2
+}
+]
+};
+const config01 = {
+type: 'pie',
+data: data01,
+options: {
+responsive: true,
+aspectRatio: 2
+}
+};
+const myChart01 = new Chart(document.getElementById('mChart01'), config01,);
+</script>
+<script>
+	const labels = "{{ categorieLabel | join('|') }}".split("|");
+const data02 = {
+labels: labels,
+datasets: [
+{
+axis: 'y',
+label: 'Membres par Categories',
+fill: false,
+data: "{{ categorieValeur | join('|') }}".split("|"),
+backgroundColor: [
+'rgba(54, 162, 235, 0.7)',
+'rgba(54, 162, 235, 0.7)',
+'rgba(54, 162, 235, 0.7)',
+'rgba(54, 162, 235, 0.7)',
+'rgba(54, 162, 235, 0.7)'
+],
+borderWidth: 1
+}
+]
+};
+const config02 = {
+type: 'bar',
+data: data02,
+options: {
+scales: {
+x: {
+beginAtZero: true
+}
+},
+responsive: true,
+aspectRatio: 2,
+indexAxis: 'y'
+}
+};
+const myChart02 = new Chart(document.getElementById('mChart02'), config02,);
+</script>{% endblock %}

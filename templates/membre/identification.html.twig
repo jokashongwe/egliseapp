@@ -31,7 +31,9 @@ document.getElementById("toast1").hidden = true
 {% block body %}
 
 	<section class="ftco-section ">
+
 		<div class="container ">
+
 			<div class="row justify-content-center ">
 				<div class="col-md-12 ">
 					<div class="wrapper ">
@@ -43,6 +45,7 @@ document.getElementById("toast1").hidden = true
 									</div>
 									<div id="form-message-warning " class="mb-4"></div>
 									<div id="form-message-success " class="mb-4"></div>
+
 									<form method="POST" action="{{path('identification_fidel')}}" id="contactForm " name="contactForm " class="contactForm ">
 
 										<div class="row">
@@ -78,7 +81,15 @@ document.getElementById("toast1").hidden = true
 											</div>
 										</div>
 
+
 										<div class="row ">
+
+											<div class="col-md-6 ">
+												<div class="form-group ">
+													<label class="label " for="name">Lieu de Naissance</label>
+													<input type="text" class="form-control required" id="first-name" name="lieu_naissance" placeholder="Profession" required>
+												</div>
+											</div>
 											<div class="col-md-6 ">
 												<div class="form-group ">
 													<label class="label" for="name">
@@ -87,10 +98,68 @@ document.getElementById("toast1").hidden = true
 													<input type="date" class="form-control" name="date_naissance" placeholder="" required>
 												</div>
 											</div>
+										</div>
+
+										<div class="row ">
+
 											<div class="col-md-6 ">
 												<div class="form-group ">
 													<label class="label " for="name">Profession</label>
 													<input type="text" class="form-control required" id="first-name" name="profession" placeholder="Profession" required>
+												</div>
+											</div>
+											<div class="col-md-6 ">
+												<div class="form-group ">
+													<label class="label " for="name">Province_Adresse</label>
+													<input type="text" class="form-control required" id="first-name" name="province" placeholder="Profession" required>
+												</div>
+											</div>
+										</div>
+
+										<div class="row ">
+											<div class="col-md-6 ">
+												<div class="form-group ">
+													<label class="label " for="name">Avenue Adresse</label>
+													<input type="text" class="form-control required" id="first-name" name="avenue" placeholder="Profession" required>
+												</div>
+											</div>
+											<div class="col-md-6 ">
+												<div class="form-group ">
+													<label class="label " for="name">Numero Adresse</label>
+													<input type="text" class="form-control required" id="first-name" name="Numero_adresse" placeholder="Profession" required>
+												</div>
+											</div>
+										</div>
+
+										<div class="row ">
+											<div class="col-md-6 ">
+												<div class="form-group ">
+													<label class="label " for="name">Quartier Adresse</label>
+													<input type="text" class="form-control required" id="first-name" name="Quartier" placeholder="Profession" required>
+												</div>
+											</div>
+											<div class="col-md-6 ">
+												<div class="form-group ">
+													<label class="label " for="name">Commune Adresse</label>
+													<input type="text" class="form-control required" id="first-name" name="commune" placeholder="Profession" required>
+												</div>
+											</div>
+										</div>
+										<div class="row ">
+											<div class="col-md-6 ">
+												<div class="form-group ">
+													<label class="label " for="name">Ville Adresse</label>
+													<input type="text" class="form-control required" id="first-name" name="ville" placeholder="Profession" required>
+												</div>
+											</div>
+											<div class="col-md-6 ">
+												<div class="form-group ">
+													<label class="label" for="name">Categorie</label>
+													<select class="form-select" name="categorie">
+														<option value="PAPA">PAPA</option>
+														<option value="MAMAN">MAMAN</option>
+														<option value="JEUNE">JEUNE</option>
+													</select>
 												</div>
 											</div>
 										</div>
@@ -135,18 +204,27 @@ document.getElementById("toast1").hidden = true
 												</div>
 											</div>
 										</div>
-										<div class="row">
+										<div class="row ">
 											<div class="col-md-6 ">
 												<div class="form-group ">
-													<label class="label" for="name">Categorie</label>
-													<select class="form-select" name="categorie">
-														<option value="PAPA">PAPA</option>
-														<option value="MAMAN">MAMAN</option>
-														<option value="JEUNE">JEUNE</option>
+													<label class="label " for="name">Departement</label>
+
+													<select class="form-select" name="departement">
+														<option value="Masculin">Masculin</option>
+														<option value="Féminin">Féminin</option>
 													</select>
 												</div>
 											</div>
+											<div class="col-md-6 ">
+												<div class="form-group ">
+													<label class="label " for="name">Sous Departement</label>
 
+													<select class="form-select" name="sousdepartement">
+														<option value="Masculin">Masculin</option>
+														<option value="Féminin">Féminin</option>
+													</select>
+												</div>
+											</div>
 										</div>
 
 										<div class="row ">
@@ -158,7 +236,7 @@ document.getElementById("toast1").hidden = true
 											</div>
 											<div class="col-md-12 ">
 												<div class="form-group ">
-													<button type="submit" class="btn btn-danger ">Enregistrer</button>
+													<button type="submit" class="btn btn-info ">Enregistrer</button>
 													<div class="submitting "></div>
 												</div>
 											</div>
@@ -167,7 +245,7 @@ document.getElementById("toast1").hidden = true
 								</div>
 							</div>
 							<div class="col-lg-4 col-md-5 d-flex align-items-stretch ">
-								<div class="info-wrap bg-danger w-100 p-md-5 p-4 ">
+								<div class="info-wrap bg-info w-100 p-md-5 p-4 ">
 
 									<br>
 									<div class="dbox w-100 d-flex align-items-start ">

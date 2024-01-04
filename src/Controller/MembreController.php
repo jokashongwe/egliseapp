@@ -28,7 +28,8 @@ class MembreController extends AbstractController
         Security $security
     ): Response {
 
-
+        $users = $security->getUser();
+        //$id_users = $users->getId();
         if (strtolower($request->getMethod()) == "get") {
 
             return $this->render('membre/identification.html.twig', []);
@@ -44,6 +45,7 @@ class MembreController extends AbstractController
         $prenom = $request->get('prenom');
         $sexe = $request->get('sexe');
         $date_naissance = $request->get('date_naissance');
+        $lieu_naissance = $request->get('lieu_naissance');
         $profession = $request->get('profession');
         $date_conversion = $request->get('date_conversion');
         $date_bapteme = $request->get('date_bapteme');
@@ -51,6 +53,13 @@ class MembreController extends AbstractController
         $etat_civil = $request->get('etat_civil');
         $categorie = $request->get('categorie');
         $observation = $request->get('observation');
+
+        $avenue = $request->get('avenue');
+        $Numero_adresse = $request->get('Numero_adresse');
+        $Quartier = $request->get('Quartier');
+        $commune = $request->get('commune');
+        $ville = $request->get('ville');
+        $province = $request->get('province');
 
 
 
@@ -74,7 +83,10 @@ class MembreController extends AbstractController
             $categorie != null && $date_conversion != null &&
             $date_bapteme != null && $phone != null
             && $etat_civil != null &&  $observation != null
-            && $categorie != null
+            && $categorie != null  &&   $avenue != null
+            && $Numero_adresse != null && $Quartier != null
+            && $commune != null && $ville != null && $lieu_naissance != null && $province != null
+
 
 
         ) {
@@ -83,6 +95,7 @@ class MembreController extends AbstractController
             $fidel->setPrenom($prenom);
             $fidel->setSexe($sexe);
             $fidel->setDateNaissance($dateNai);
+            $fidel->setLieunaissance($lieu_naissance);
             $fidel->setProfession($profession);
             $fidel->setDateConversion($dateCon);
             $fidel->setDateBapteme($dateBapt);
@@ -90,6 +103,16 @@ class MembreController extends AbstractController
             $fidel->setEtatcivil($etat_civil);
             $fidel->setCategorie($categorie);
             $fidel->setObservation($observation);
+            $fidel->setAvenue($avenue);
+            $fidel->setNumeroadresse($Numero_adresse);
+            $fidel->setQuartier($Quartier);
+            $fidel->setCommune($commune);
+            $fidel->setVille($ville);
+            $fidel->setProvince($province);
+            $fidel->setSupprimer(false);
+            $fidel->setDeces(false);
+            // $fidel->setIdutilisateur($id_users);
+            $fidel->setDateEnregistrement(new \DateTime());
 
             $manager->persist($fidel);
             $manager->flush();
