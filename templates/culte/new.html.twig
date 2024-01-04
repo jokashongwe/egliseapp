@@ -8,7 +8,37 @@
 
     {{ include('culte/_form.html.twig') }}
 
-    <a class="back-link link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="{{ path('app_culte_index') }}">Retour à la liste</a>
+    <div class="p-3" >
+        <p>Dime</p>
+        <div class="row">
+            <div class="col-md-4">
+                <label class="form-label">Montant FC</label>
+                <input class="form-control" name="dime_montant_fc" />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Montant USD</label>
+                <input class="form-control" name="dime_montant_usd" />
+            </div>
+        </div>
+    </div>
+    <div class="mt-4 p-3" >
+        <p>Offrande Ordinaire</p>
+        <div class="row">
+            <div class="col-md-4">
+                <label class="form-label">Montant FC</label>
+                <input class="form-control" name="oo_montant_fc" />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Montant USD</label>
+                <input class="form-control" name="oo_montant_usd" />
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Envoyer</button>
+
+    </form>
+    <a class="btn btn-secondary" href="{{ path('app_culte_index') }}">Retour à la liste</a>
 </div>
 {% endblock %}
 {% block javascripts %}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Offrande{% endblock %}
+
+{% block body %}
+    <h1>Offrande</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ offrande.id }}</td>
+            </tr>
+            <tr>
+                <th>Libelle</th>
+                <td>{{ offrande.libelle }}</td>
+            </tr>
+            <tr>
+                <th>MontantFC</th>
+                <td>{{ offrande.montantFC }}</td>
+            </tr>
+            <tr>
+                <th>MontantUSD</th>
+                <td>{{ offrande.montantUSD }}</td>
+            </tr>
+            <tr>
+                <th>MontantEUR</th>
+                <td>{{ offrande.montantEUR }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ offrande.createdAt ? offrande.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_offrande_index') }}">back to list</a>
+
+    <a href="{{ path('app_offrande_edit', {'id': offrande.id}) }}">edit</a>
+
+    {{ include('offrande/_delete_form.html.twig') }}
+{% endblock %}

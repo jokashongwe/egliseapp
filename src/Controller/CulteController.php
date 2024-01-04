@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Culte;
+use App\Entity\Offrande;
+use App\Entity\TypeOffrande;
 use App\Form\CulteType;
 use App\Repository\CulteRepository;
+use App\Repository\TypeOffrandeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,18 +26,47 @@ class CulteController extends AbstractController
     }
 
     #[Route('/new', name: 'app_culte_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, TypeOffrandeRepository $typeOffrandeRepository, EntityManagerInterface $entityManager): Response
     {
+        
+        $culte_all = $request->get("culte");
+        $dateCulte = $culte_all['dateculte'];
+        $myDate = date_create($dateCulte);
         $culte = new Culte();
         $form = $this->createForm(CulteType::class, $culte);
         $form->handleRequest($request);
 
+        
+
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($culte);
             $entityManager->flush();
+            $dimeFC = $request->get("dime_montant_fc");
+            $dimeUSD = $request->get("dime_montant_usd");
+            
+            $dime = new Offrande();
+            $typeOff = $typeOffrandeRepository->findOneBy(['code' => "DIME"]);
+            $dime->setTypeOffrande($typeOff);
+            $dime->setMontantFC($dimeFC);
+            $dime->setMontantUSD($dimeUSD);
+            $entityManager->persist($dime);
+            $entityManager->flush();
 
+            $off = new Offrande();
+            $OffrandeFC = $request->get("oo_montant_fc");
+            $offrandeUSD = $request->get("oo_montant_usd");
+            $typeOff = $typeOffrandeRepository->findOneBy(['code' => "OFFRANDE-ORDINAIRE"]);
+            $off->setTypeOffrande($typeOff);
+            $off->setMontantFC($OffrandeFC);
+            $off->setMontantUSD($offrandeUSD);
+            $entityManager->persist($off);
+            $entityManager->flush();
+            if(is_null($dimeFC) || is_null($dimeUSD) || is_null($OffrandeFC) || is_null($offrandeUSD) ){
+                return $this->redirectToRoute('app_culte_index');
+            }
             return $this->redirectToRoute('app_culte_index', [], Response::HTTP_SEE_OTHER);
         }
+
 
         return $this->render('culte/new.html.twig', [
             'culte' => $culte,

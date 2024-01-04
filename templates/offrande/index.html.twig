@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Offrande index{% endblock %}
+
+{% block body %}
+    <h1>Offrande index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libelle</th>
+                <th>MontantFC</th>
+                <th>MontantUSD</th>
+                <th>MontantEUR</th>
+                <th>CreatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for offrande in offrandes %}
+            <tr>
+                <td>{{ offrande.id }}</td>
+                <td>{{ offrande.libelle }}</td>
+                <td>{{ offrande.montantFC }}</td>
+                <td>{{ offrande.montantUSD }}</td>
+                <td>{{ offrande.montantEUR }}</td>
+                <td>{{ offrande.createdAt ? offrande.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_offrande_show', {'id': offrande.id}) }}">show</a>
+                    <a href="{{ path('app_offrande_edit', {'id': offrande.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_offrande_new') }}">Create new</a>
+{% endblock %}

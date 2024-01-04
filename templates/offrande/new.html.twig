@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Offrande{% endblock %}
+
+{% block body %}
+    <h1>Create new Offrande</h1>
+
+    {{ include('offrande/_form.html.twig') }}
+
+    <a href="{{ path('app_offrande_index') }}">back to list</a>
+{% endblock %}

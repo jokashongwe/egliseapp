@@ -27,6 +27,7 @@
                 <td>{{ culte.dateculte ? culte.dateculte|date('Y-m-d') : '' }}</td>
                 <td>{{ culte.effectif }}</td>
                 <td>{{ culte.nouveauVenu }}</td>
+                <td> <a href="{{ path('app_offrande_culte', {'id': culte.id}) }}" >Offrandes</a> </td>
                 <td>
                     <a href="{{ path('app_culte_show', {'id': culte.id}) }}">Afficher</a>
                     <a href="{{ path('app_culte_edit', {'id': culte.id}) }}">Modifier</a>
