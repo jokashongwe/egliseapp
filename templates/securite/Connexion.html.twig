@@ -1,0 +1,117 @@
+{% block stylesheets %}
+	<link rel="stylesheet" href="https://bootswatch.com/5/flatly/bootstrap.min.css"/>
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="login/css/style.css">
+{% endblock %}
+
+{% block javascripts %}
+
+
+	<script src="login/js/jquery.min.js"></script>
+	<script src="login/js/popper.js"></script>
+	<script src="login/js/bootstrap.min.js"></script>
+	<script src="login/js/main.js"></script>
+	<script>
+		function fermer() {
+
+document.getElementById("toast1").hidden = true
+}
+	</script>
+
+{% endblock %}
+
+
+{% block body %}
+
+	{% if error %}
+		<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+	{% endif %}
+
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-12 col-lg-10">
+					<div class="wrap d-md-flex">
+						<div class="p-4 p-lg-5 text-center d-flex align-items-center order-md-last">
+							<div class="row">
+								<img style="height: 35vh" src="/image/trinite.jpg"/>
+							</div>
+						</div>
+						<div class="login-wrap p-4 p-lg-5">
+							<div class="d-flex">
+								<div class="w-100">
+									<h3 style="text-transform: uppercase" class="mb-4">Connexion</h3>
+								</div>
+								<div class="w-100">
+									<p class="social-media d-flex justify-content-end">
+										<a href="#" class="social-icon d-flex align-items-center justify-content-center">
+											<span class="fa fa-facebook"></span>
+										</a>
+										<a href="#" class="social-icon d-flex align-items-center justify-content-center">
+											<span class="fa fa-twitter"></span>
+										</a>
+									</p>
+								</div>
+							</div>
+							<form action="{{ path('Connexion') }}" class="signin-form" method="post">
+								<div class="form-group mb-3">
+									<label class="label" for="username">Email</label>
+									<input type="text" id="username" class="form-control" placeholder="email" name="_username" value="{{ last_username }}" required>
+								</div>
+								<div class="form-group mb-3">
+									<label class="label" for="password">Mot de passe</label>
+									<input type="password" class="form-control" placeholder="Mot de passe" id="password" name="_password" required>
+								</div>
+								<div class="form-group">
+									<input type="hidden" name="_target_path" value="{{ path('Partage') }}"/>
+									<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+									<button type="submit" class="form-control btn btn-secondary submit px-3">Se connecter</button>
+								</div>
+								<div class="form-group d-md-flex">
+									<div class="w-50 text-left"></div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	{% for message in app.flashes('danger') %}
+
+		<div class="toast show" role="alert" id="toast1" data-delay="5000" style="position: absolute; top: 1rem; right: 1rem; min-width:250px;" aria-live="assertive" aria-atomic="true">
+			<div class="toast-header">
+				<strong class="me-auto">Message</strong>
+				<small></small>
+				<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Fermer" onclick="window.close();">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="toast-body">
+				<p class="text-danger">{{message}}</p>
+			</div>
+		</div>
+	{% endfor %}
+
+	{% for message in app.flashes('notification') %}
+
+		<div class="toast show" role="alert" id="toast1" data-delay="5000" style="position: absolute; center: 1rem; right: 1rem; min-width:250px;" aria-live="assertive" aria-atomic="true">
+			<div class="toast-header">
+				<strong class="me-auto">Message</strong>
+				<small></small>
+				<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Fermer" onclick="fermer()">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="toast-body">
+				<p class="text-danger">{{message}}</p>
+			</div>
+		</div>
+
+	{% endfor %}
+
+{% endblock %}

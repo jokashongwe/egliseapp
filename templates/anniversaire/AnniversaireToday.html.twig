@@ -1,0 +1,231 @@
+{% extends "root.html.twig" %}
+
+
+{% block javascripts %}
+
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!--===============================================================================================-->
+	<script src="{{asset('table/vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+	<!--===============================================================================================-->
+	<script src="{{asset('table/vendor/bootstrap/js/popper.js')}}"></script>
+	<script src="{{asset('table/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+	<!--===============================================================================================-->
+	<script src="{{asset('table/vendor/select2/select2.min.js')}}"></script>
+	<!--===============================================================================================-->
+	<script src="{{asset('table/js/main.js')}}"></script>
+	<script>
+
+		function fermer() {
+
+document.getElementById("toast1").hidden = true
+}
+	</script>
+
+
+	<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+
+
+	<script>
+		$(document).ready(function () {
+$('#myTable').DataTable({
+language: {
+url: 'https://cdn.datatables.net/plug-ins/1.12.0/i18n/fr-FR.json'
+}
+});
+});
+	</script>
+
+
+{% endblock %}
+
+
+{% block body %}
+
+
+	<div class="container">
+		<div class="row height d-flex justify-content-center align-items-center">
+			<form method="POST" action="">
+				<h3>JOYEUX ANNIVERSAIRE</h3>
+				<br>
+				<div class="row mt-3">
+					<table id="myTable" class="table table-bordered">
+						<caption>C.E LA TRINITE</caption>
+						<thead>
+							<tr>
+								<th>Nom</th>
+								<th>Postnom</th>
+								<th>Prenom</th>
+								<th>Sexe</th>
+								<th>Categorie</th>
+								<th>Age</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							{% for fidel in fidels %}
+
+
+								<tr>
+									<td class="pl-2">
+										{{fidel.nom}}</td>
+									<td class="pl-2">{{fidel.postnom}}</td>
+									<td class="pl-2">{{fidel.prenom}}</td>
+									<td class="pl-2">{{fidel.sexe}}</td>
+									<td class="pl-2">{{fidel.categorie}}</td>
+
+									{% set age = date().diff(date(fidel.DateNaissance)).y %}
+									<td class="pl-2">
+
+										{{age}}
+										ans
+
+									</td>
+
+
+									<td class="pl-2">
+										<button type="button" class="btn btn-dark bg-opacity-25" data-toggle="modal" data-target="#{{fidel.id}}">
+											<i class="fa-solid fa-eye"></i>
+											Voir</button>
+									</td>
+								</tr>
+
+							{% endfor %}
+						</tbody>
+					</tbody>
+				</table>
+			</div>
+
+		</form>
+
+	</div>
+</div>
+
+{% for fidel in fidels %}
+
+	<div class="modal fade" id="{{fidel.id}}" tabindex="-1" aria-labelledby="task1_ModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+
+					<div class="row">
+						<div class="col-md-4 col-sm-12">
+							<img src="{{ asset('image/trinite.jpg') }}" style="height: 75px">
+						</div>
+						<br>
+						<br>
+					</div>
+
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="fermerr()">
+						<span aria-hidden="true">X</span>
+					</button>
+				</div>
+				<div class="modal-body">
+
+					<p style="font-size: 90%; margin-bottom: 1%;" id="infos">
+						<span style="font-weight: bold;">
+							Nom:
+						</span>
+						{{ fidel.nom }}
+					</p>
+					<p style="font-size: 90%; margin-bottom: 1%" id="infos">
+						<span style="font-weight: bold;">Postnom:
+						</span>
+						{{ fidel.postnom }}
+					</p>
+					<p style="font-size: 90%; margin-bottom: 1%;" id="infos">
+						<span style="font-weight: bold;">Prenom:
+						</span>
+						{{ fidel.prenom }}
+					</p>
+					<p style="font-size: 90%; margin-bottom: 1%;" id="infos">
+						<span style="font-weight: bold;">Sexe:
+						</span>
+						{{ fidel.sexe }}
+					</p>
+
+
+					<p style="font-size: 90%; margin-bottom: 1%;" id="infos">
+						<span style="font-weight: bold;">Lieu_Naissance:
+						</span>
+						{{ fidel.lieunaissance }}
+					</p>
+					<p style="font-size: 90%; margin-bottom: 1%;" id="infos">
+						<span style="font-weight: bold;">Date de  naissance:</span>
+						{{ fidel.DateNaissance | date("d/m/Y") }}
+					</p>
+
+					<p style="font-size: 90%; margin-bottom: 1%;" id="infos">
+						<span style="font-weight: bold;">Avenue:
+						</span>
+						{{ fidel.avenue }}
+						&nbsp;
+						<span style="font-weight: bold;">
+							N°:
+						</span>
+						{{ fidel.numeroadresse }}
+						&nbsp;
+						<span style="font-weight: bold;">
+							Quartier:
+						</span>
+						{{ fidel.quartier}}
+						&nbsp;
+						<span style="font-weight: bold;">
+							Commune:
+						</span>
+						{{ fidel.commune}}
+						&nbsp;
+						<span style="font-weight: bold;">
+							Ville:
+						</span>
+						{{ fidel.ville}}
+						&nbsp;
+						<span style="font-weight: bold;">
+							Province:
+						</span>
+						{{ fidel.province}}
+						&nbsp;
+
+					</p>
+
+
+					<p style="font-size: 90%; margin-bottom: 1%;" id="infos">
+
+						<span style="font-weight: bold;">
+							<i class="fa fa-phone"></i>
+							Numero_Telephone:</span>
+						{{fidel.NumeroPhone}}
+						&nbsp;
+
+					</p>
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-info" data-dismiss="modal" onclick="fermerr()">Fermer</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endfor %}
+
+{% for message in app.flashes('notification') %}
+
+	<div class="toast show" role="alert" id="toast1" data-delay="5000" style="position: absolute; top: 1rem; right: 1rem; min-width:250px;" aria-live="assertive" aria-atomic="true">
+		<div class="toast-header">
+			<strong class="me-auto">Message</strong>
+			<small></small>
+			<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Fermer" onclick="fermer()">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="toast-body">
+			<p class="text-danger">{{message}}</p>
+		</div>
+	</div>
+{% endfor %}{% endblock %}
