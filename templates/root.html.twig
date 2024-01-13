@@ -47,7 +47,7 @@
 								</li>
 
 								<li>
-									<a class="nav-link" href="">Déconnexion</a>
+									<a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
 								</li>
 							</ul>
 						</li>
@@ -142,7 +142,7 @@
 							</a>
 							<ul class="dropdown-menu dropdown-submenu">
 								<li>
-									<a class="dropdown-item" href="">Creation Departement</a>
+									<a class="dropdown-item" href="{{path('Creation_Departement')}}">Creation Departement</a>
 								</li>
 								<li>
 									<a class="dropdown-item" href="">Modication Departement</a>
@@ -153,6 +153,9 @@
 								<li>
 									<a class="dropdown-item" href="">Liste Departement</a>
 								</li>
+								<li>
+									<a class="dropdown-item" href="">Responsable</a>
+								</li>
 
 							</ul>
 						</li>
@@ -161,7 +164,7 @@
 							</a>
 							<ul class="dropdown-menu dropdown-submenu">
 								<li>
-									<a class="dropdown-item" href="">Creation Sous-Departement</a>
+									<a class="dropdown-item" href="{{path('Creation_Sousdepartement')}}">Creation Sous-Departement</a>
 								</li>
 								<li>
 									<a class="dropdown-item" href="">Modication Sous-Departement</a>
@@ -172,6 +175,9 @@
 								<li>
 									<a class="dropdown-item" href="">Liste Sous-Departement</a>
 								</li>
+								<li>
+									<a class="dropdown-item" href="">Responsable</a>
+								</li>
 
 							</ul>
 						</li>
@@ -180,7 +186,7 @@
 							</a>
 							<ul class="dropdown-menu dropdown-submenu">
 								<li>
-									<a class="dropdown-item" href="">Creation Utilisateur</a>
+									<a class="dropdown-item" href=" {{path('Creation_User')}} ">Creation Utilisateur</a>
 								</li>
 								<li>
 									<a class="dropdown-item" href="">Modification Utilisateur</a>
@@ -190,21 +196,6 @@
 								</li>
 								<li>
 									<a class="dropdown-item" href="">liste Utilisateur</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a class="dropdown-item" href="#">Administrateur<i class="fa-solid fa-caret-right"></i>
-							</a>
-							<ul class="dropdown-menu dropdown-submenu">
-								<li>
-									<a class="dropdown-item" href="">Creation Administrateur</a>
-								</li>
-								<li>
-									<a class="dropdown-item" href="">Modification Administrateur</a>
-								</li>
-								<li>
-									<a class="dropdown-item" href="">Liste utilisateurs</a>
 								</li>
 							</ul>
 						</li>

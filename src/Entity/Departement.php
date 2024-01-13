@@ -21,9 +21,22 @@ class Departement
     #[ORM\OneToMany(mappedBy: 'departement', targetEntity: SousDepartement::class)]
     private Collection $sousDepartements;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $responsable = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $adjoint = null;
+
+    #[ORM\OneToMany(mappedBy: 'departement', targetEntity: Fidel::class)]
+    private Collection $fidels;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $supprimer = null;
+
     public function __construct()
     {
         $this->sousDepartements = new ArrayCollection();
+        $this->fidels = new ArrayCollection();
     }
 
 
@@ -71,6 +84,72 @@ class Departement
                 $sousDepartement->setDepartement(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getResponsable(): ?string
+    {
+        return $this->responsable;
+    }
+
+    public function setResponsable(?string $responsable): static
+    {
+        $this->responsable = $responsable;
+
+        return $this;
+    }
+
+    public function getAdjoint(): ?string
+    {
+        return $this->adjoint;
+    }
+
+    public function setAdjoint(?string $adjoint): static
+    {
+        $this->adjoint = $adjoint;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Fidel>
+     */
+    public function getFidels(): Collection
+    {
+        return $this->fidels;
+    }
+
+    public function addFidel(Fidel $fidel): static
+    {
+        if (!$this->fidels->contains($fidel)) {
+            $this->fidels->add($fidel);
+            $fidel->setDepartement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFidel(Fidel $fidel): static
+    {
+        if ($this->fidels->removeElement($fidel)) {
+            // set the owning side to null (unless already changed)
+            if ($fidel->getDepartement() === $this) {
+                $fidel->setDepartement(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isSupprimer(): ?bool
+    {
+        return $this->supprimer;
+    }
+
+    public function setSupprimer(?bool $supprimer): static
+    {
+        $this->supprimer = $supprimer;
 
         return $this;
     }

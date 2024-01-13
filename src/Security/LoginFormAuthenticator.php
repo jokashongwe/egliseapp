@@ -72,7 +72,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         $credentials = new PasswordCredentials($password);
         // $credentials = [];
         return new Passport(new UserBadge($email, function ($userIdentifier) {
-            return $this->userRepository->findOneBy(['email' => $userIdentifier, 'supp' => false]);
+            return $this->userRepository->findOneBy(['username' => $userIdentifier, 'supprimer' => false]);
         }), $credentials);
     }
 }

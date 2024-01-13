@@ -5,9 +5,9 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Ecole;
-use App\Entity\Fidel;;
-
+use App\Entity\Fidel;
+use App\Entity\SousDepartement;
+use App\Entity\Departement;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,7 +19,7 @@ use Symfony\Component\Security\Core\Security;
 
 class MembreController extends AbstractController
 {
-    #[Route('/membre/creation_fidel', name: 'identification_fidel')]
+    #[Route('/Membre/creation_fidel', name: 'identification_fidel')]
     public function index(
         NotifierInterface $notifier,
         ManagerRegistry $doctrine,
@@ -29,16 +29,27 @@ class MembreController extends AbstractController
     ): Response {
 
         $users = $security->getUser();
-        //$id_users = $users->getId();
+
+        $departements = $doctrine->getRepository(Departement::class)->findAll();
+        $sousdepartements = $doctrine->getRepository(SousDepartement::class)->findAll();
+
+        if ($departements == null || $sousdepartements == null) {
+            $notifier->send(new Notification("Erreur , vous devez d'abord créer le departement et le sous-departement", ['browser']));
+
+            return $this->redirectToRoute('Partage');
+        }
+
         if (strtolower($request->getMethod()) == "get") {
 
-            return $this->render('membre/identification.html.twig', []);
+            return $this->render('membre/identification.html.twig', [
+                'departements' => $departements
+            ]);
         }
 
 
 
 
-
+        /*  */
 
         $nom = $request->get('nom');
         $postnom = $request->get('postnom');
@@ -62,8 +73,13 @@ class MembreController extends AbstractController
         $province = $request->get('province');
 
 
+        $departement = $request->get('departement');
+        $sous_departement = $request->get('sousDepartement');
 
 
+
+        $Departement1 = $doctrine->getRepository(Departement::class)->find($departement);
+        $sousDepartement1 = $doctrine->getRepository(SousDepartement::class)->findOneBy(['nom' => $sous_departement]);
 
         $dateNai  = date_create_from_format("Y-m-d", $date_naissance);
         $dateCon  = date_create_from_format("Y-m-d", $date_conversion);
@@ -111,7 +127,11 @@ class MembreController extends AbstractController
             $fidel->setProvince($province);
             $fidel->setSupprimer(false);
             $fidel->setDeces(false);
-            // $fidel->setIdutilisateur($id_users);
+
+            $fidel->setDepartement($Departement1);
+            $fidel->setSousdepartement($sousDepartement1);
+
+
             $fidel->setDateEnregistrement(new \DateTime());
 
             $manager->persist($fidel);
@@ -123,6 +143,8 @@ class MembreController extends AbstractController
             return $this->redirectToRoute('identification_fidel');
         }
 
-        return $this->render('membre/identification.html.twig');
+        return $this->render('membre/identification.html.twig', [
+            'departements' => $departements
+        ]);
     }
 }
