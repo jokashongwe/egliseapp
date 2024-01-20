@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Fidel;
+use App\Entity\Departement;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,7 +19,7 @@ use Symfony\Component\Security\Core\Security;
 
 class PartageController extends AbstractController
 {
-    #[Route('/partage', name: 'Partage')]
+    #[Route('/Partage', name: 'Partage')]
     public function index(
         ManagerRegistry $doctrine,
         Request $request,

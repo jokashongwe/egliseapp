@@ -6,6 +6,15 @@
 	<link rel=" stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css ">
 
 	<link rel="stylesheet" href="{{asset('parent/css/style.css')}} ">
+
+	<style>
+
+
+		/* Cacher le formulaire par défaut */
+		#monFormulaire {
+			display: none;
+		}
+	</style>
 {% endblock %}
 
 {% block javascripts %}
@@ -15,6 +24,24 @@
 	<script src="{{asset('parent/js/bootstrap.min.js')}} "></script>
 	<script src="{{asset('parent/js/jquery.validate.min.js')}} "></script>
 	<script src="{{asset('parent/js/main.js')}} "></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="{{ asset('js/selects.js') }}"></script>
+
+	<script>
+
+
+		function toggleFormVisibility() {
+var checkbox = document.getElementById("toggleCheckbox");
+var formulaire = document.getElementById("monFormulaire");
+
+// Vérifier si la case est cochée ou non
+if (checkbox.checked) { // Afficher le formulaire si la case est cochée
+formulaire.style.display = "block";
+} else { // Cacher le formulaire si la case est désélectionnée
+formulaire.style.display = "none";
+}
+}
+	</script>
 
 	<script>
 
@@ -24,7 +51,21 @@ document.getElementById("toast1").hidden = true
 }
 	</script>
 
+	<script>
+		document.getElementById('departement').addEventListener('change', function () {
+var departementId = this.value;
 
+// Utiliser AJAX pour récupérer les sous-départements depuis le serveur
+fetch('/get-sous-departements/' + departementId).then(response => response.json()).then(data => {
+var sousDepartementSelect = document.getElementById('sousDepartement');
+sousDepartementSelect.innerHTML = '<option value="">Sélectionnez un Sous Département</option>';
+
+data.forEach(function (sousDepartement) {
+sousDepartementSelect.innerHTML += '<option value="' + sousDepartement + '">' + sousDepartement + '</option>';
+});
+}).catch(error => console.error('Erreur lors de la récupération des Sous Départements', error));
+});
+	</script>
 {% endblock %}
 
 
@@ -193,40 +234,40 @@ document.getElementById("toast1").hidden = true
 											<div class="col-md-6 ">
 												<div class="form-group ">
 													<label class="label " for="name">Etat Civil</label>
-
 													<select class="form-select" name="etat_civil">
 														<option value="MARIE">MARIE</option>
 														<option value="CELIBATAIRE">CELIBATAIRE</option>
 														<option value="DIVORCE">DIVORCE</option>
 														<option value="AUTRES">AUTRES</option>
 													</select>
-
 												</div>
 											</div>
 										</div>
-										<div class="row ">
+										<input type="checkbox" id="toggleCheckbox" onchange="toggleFormVisibility()">
+
+										<label class="label " for="name">Je suis un(e) Ouvrier(e)</label>
+										<div class="row " id="monFormulaire">
 											<div class="col-md-6 ">
 												<div class="form-group ">
 													<label class="label " for="name">Departement</label>
+													<select class="form-control" id="departement" name="departement">
 
-													<select class="form-select" name="departement">
-														<option value="Masculin">Masculin</option>
-														<option value="Féminin">Féminin</option>
+														<option value="">Sélectionnez un Département</option>
+														{% for departement in departements %}
+															<option value="{{ departement.id }}">{{ departement.nom }}</option>
+														{% endfor %}
 													</select>
 												</div>
 											</div>
 											<div class="col-md-6 ">
 												<div class="form-group ">
 													<label class="label " for="name">Sous Departement</label>
-
-													<select class="form-select" name="sousdepartement">
-														<option value="Masculin">Masculin</option>
-														<option value="Féminin">Féminin</option>
+													<select
+														class="form-control" id="sousDepartement" name="sousDepartement">{# Les options seront chargées dynamiquement par JavaScript #}
 													</select>
 												</div>
 											</div>
 										</div>
-
 										<div class="row ">
 											<div class="col-md-12 ">
 												<div class="form-group ">

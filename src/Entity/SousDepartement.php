@@ -24,6 +24,15 @@ class SousDepartement
 
     #[ORM\OneToMany(mappedBy: 'sousdepartement', targetEntity: Fidel::class)]
     private Collection $fidels;
+    //departement
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $responsable = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $adjoint = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $supprimer = null;
 
     public function __construct()
     {
@@ -85,6 +94,42 @@ class SousDepartement
                 $fidel->setSousdepartement(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getResponsable(): ?string
+    {
+        return $this->responsable;
+    }
+
+    public function setResponsable(?string $responsable): static
+    {
+        $this->responsable = $responsable;
+
+        return $this;
+    }
+
+    public function getAdjoint(): ?string
+    {
+        return $this->adjoint;
+    }
+
+    public function setAdjoint(?string $adjoint): static
+    {
+        $this->adjoint = $adjoint;
+
+        return $this;
+    }
+
+    public function isSupprimer(): ?bool
+    {
+        return $this->supprimer;
+    }
+
+    public function setSupprimer(?bool $supprimer): static
+    {
+        $this->supprimer = $supprimer;
 
         return $this;
     }

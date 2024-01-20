@@ -84,8 +84,11 @@ class Fidel
     private ?\DateTimeInterface $dateEnregistrement = null;
 
     #[ORM\ManyToOne(inversedBy: 'fidels')]
-    #[ORM\JoinColumn(nullable: false)]
+
     private ?SousDepartement $sousdepartement = null;
+
+    #[ORM\ManyToOne(inversedBy: 'fidels')]
+    private ?Departement $departement = null;
 
     public function getId(): ?int
     {
@@ -377,6 +380,18 @@ class Fidel
     public function setSousdepartement(?SousDepartement $sousdepartement): static
     {
         $this->sousdepartement = $sousdepartement;
+
+        return $this;
+    }
+
+    public function getDepartement(): ?departement
+    {
+        return $this->departement;
+    }
+
+    public function setDepartement(?departement $departement): static
+    {
+        $this->departement = $departement;
 
         return $this;
     }
