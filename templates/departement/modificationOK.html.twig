@@ -1,0 +1,106 @@
+{% extends 'root.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block stylesheets %}
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{% endblock %}
+
+
+{% block javascripts %}
+	{#<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>#}
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+	{# Inclure le script JavaScript #}
+	<script>
+
+
+		// public/js/modifier_departement.js
+
+$(document).ready(function () {
+$('#form-modifier-departement').submit(function (e) {
+e.preventDefault();
+
+// Récupérer les données du formulaire
+var formData = $(this).serialize();
+var departementId = {{ departement.id }};
+// Remplacez par le bon moyen d'obtenir l'ID du département
+
+// Envoyer les données du formulaire au serveur via Ajax
+$.ajax({
+url: '/modifier-departement/' + departementId,
+method: 'POST',
+data: formData,
+success: function (response) {
+if (response.success) {
+$('#message-container').html('<div class="alert alert-success">Modification du département réussie !</div>');
+} else {
+$('#message-container').html('<div class="alert alert-danger">Échec de la modification du département.</div>');
+}
+},
+error: function () {
+$('#message-container').html('<div class="alert alert-danger">Une erreur s\'est produite lors de la soumission du formulaire..</div>');
+
+}
+});
+});
+});
+
+	</script>
+
+
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<form id="form-modifier-departement">
+					<h2 class="text-center mb-4">Modification Département</h2>
+
+					<div class="form-group">
+						<label for="nom">Nom Département :</label>
+						<input value=" {{departement.nom}} " type="text" class="form-control" id="nom" name="nom" required>
+					</div>
+
+					<div class="form-group">
+						<select name="id">
+							<label for="nom">ID :</label>
+							<option value=" {{departement.id}} "></option>
+						</select>
+					</div>
+					<div id="message-container"></div>
+
+
+					<button type="submit" class="btn btn-success btn-block">Modifier</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- Ajoutez jQuery et Popper.js avant Bootstrap JavaScript -->
+	{% for message in app.flashes('notification') %}
+
+		<div class="toast show" role="alert" id="toast1" data-delay="5000" style="position: absolute; top: 1rem; right: 1rem; min-width:250px;" aria-live="assertive" aria-atomic="true">
+			<div class="toast-header">
+				<strong class="me-auto">Message</strong>
+				<small></small>
+				<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Fermer" onclick="fermer()">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="toast-body">
+				<p class="text-danger">
+					{{message}}
+				</p>
+			</div>
+		</div>
+
+	{% endfor %}
+{% endblock %}

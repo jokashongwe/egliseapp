@@ -34,9 +34,13 @@ class SousDepartement
     #[ORM\Column(nullable: true)]
     private ?bool $supprimer = null;
 
+    #[ORM\OneToMany(mappedBy: 'sousdepartement', targetEntity: Responsable::class)]
+    private Collection $responsables;
+
     public function __construct()
     {
         $this->fidels = new ArrayCollection();
+        $this->responsables = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -130,6 +134,36 @@ class SousDepartement
     public function setSupprimer(?bool $supprimer): static
     {
         $this->supprimer = $supprimer;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Responsable>
+     */
+    public function getResponsables(): Collection
+    {
+        return $this->responsables;
+    }
+
+    public function addResponsable(Responsable $responsable): static
+    {
+        if (!$this->responsables->contains($responsable)) {
+            $this->responsables->add($responsable);
+            $responsable->setSousdepartement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeResponsable(Responsable $responsable): static
+    {
+        if ($this->responsables->removeElement($responsable)) {
+            // set the owning side to null (unless already changed)
+            if ($responsable->getSousdepartement() === $this) {
+                $responsable->setSousdepartement(null);
+            }
+        }
 
         return $this;
     }

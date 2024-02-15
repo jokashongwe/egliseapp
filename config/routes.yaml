@@ -7,3 +7,24 @@ controllers:
 get_sous_departements:
     path: /get-sous-departements/{id}
     controller: App\Controller\AjaxController::getSousDepartements
+
+search:
+    path: /search
+    controller: App\Controller\AjaxController::search
+
+searchRecherche:
+    path: /searchRecherche
+    controller: App\Controller\AjaxController::index
+
+modifier_departement:
+    path: /modifier-departement/{id}
+    controller: App\Controller\AjaxController::modifierDepartement
+
+pdf_generate:
+    path: /pdf/generate
+    controller: App\Controller\AjaxController::generatePdf
+
+
+modification_sous_departement:
+    path: /modifier-sous-departement/{id}
+    controller: App\Controller\AjaxController::modifierSousDepartement

@@ -53,6 +53,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateModif = null;
 
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    private ?Fidel $fidel = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -171,6 +174,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCreatedAt(?\DateTimeInterface $createdAt): static
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getFidel(): ?Fidel
+    {
+        return $this->fidel;
+    }
+
+    public function setFidel(?Fidel $fidel): static
+    {
+        $this->fidel = $fidel;
 
         return $this;
     }

@@ -77,4 +77,107 @@ class SousDepartementController extends AbstractController
             'departement' => $departements
         ]);
     }
+
+    #[Route('/sous_departement/Modification_SousDepartement', name: 'Modification_SousDepartement')]
+    public function indeex(
+        NotifierInterface $notifier,
+        ManagerRegistry $doctrine,
+        Request $request,
+        EntityManagerInterface $manager,
+        Security $security
+    ): Response {
+
+        $sousdepartement = $doctrine->getRepository(SousDepartement::class)->findBy([
+            'supprimer' => false
+        ]);
+
+        return $this->render('sous_departement/modification.html.twig', [
+            'sousdepartement' => $sousdepartement
+        ]);
+    }
+
+    #[Route('/sous_departement/Modification_SousDepartementok/{id}', name: 'Modification_SousDepartementok')]
+    public function indeeex(
+        $id,
+        NotifierInterface $notifier,
+        ManagerRegistry $doctrine,
+        Request $request,
+        EntityManagerInterface $manager,
+        Security $security
+    ): Response {
+
+        $sousdepartement = $doctrine->getRepository(SousDepartement::class)->find($id);
+        $departements = $doctrine->getRepository(Departement::class)->findBy([
+            'supprimer' => false
+        ]);
+        return $this->render('sous_departement/modificationOK.html.twig', [
+            'sousdepartement' => $sousdepartement,
+            'departements' => $departements
+        ]);
+    }
+
+
+    #[Route('/sous_departement/modifier_sous_departement', name: 'modifier_sous_departement')]
+
+    public function modifierSousDepartement(
+        NotifierInterface $notifier,
+        Request $request,
+
+        ManagerRegistry $doctrine,
+        // EntityManagerInterface $manager,
+    ) {
+
+        $ids = $request->get('ids');
+
+
+        // Récupérer le sous-département à partir de l'ID
+        $sousDepartement = $doctrine->getRepository(SousDepartement::class)->findOneBy([
+            'id' => $ids
+        ]);
+
+        if (!$sousDepartement) {
+            throw $this->createNotFoundException('Sous-département non trouvé pour l\'ID ');
+        }
+
+        // Récupérer les données du formulaire envoyé en AJAX
+        $data = json_decode($request->getContent(), true);
+
+        // Mettre à jour les attributs du sous-département
+        $sousDepartement->setNom($request->get('nom'));
+        $sousDepartement->setResponsable($request->get('responsable'));
+
+        // Gérer la relation ManyToOne avec le département
+        $departementId = $request->get('departementId');
+        $departement = $doctrine->getRepository(Departement::class)->find($departementId);
+        $sousDepartement->setDepartement($departement);
+
+        // Enregistrer les modifications en base de données
+        $entityManager = $doctrine->getManager();
+        $entityManager->persist($sousDepartement);
+        $entityManager->flush();
+
+        $sousdepartementss = $doctrine->getRepository(SousDepartement::class)->findBy([
+            'supprimer' => false
+        ]);
+        $notifier->send(new Notification("Félicitation, le sous-département est modifié avec succés", ['browser']));
+        return $this->redirectToRoute('Modification_SousDepartement');
+    }
+
+    #[Route('/sous_departement/Liste_SousDepartement', name: 'Liste_SousDepartement')]
+    public function indeeeex(
+        NotifierInterface $notifier,
+        ManagerRegistry $doctrine,
+        Request $request,
+        EntityManagerInterface $manager,
+        Security $security
+    ): Response {
+
+        $sousdepartement = $doctrine->getRepository(SousDepartement::class)->findBy([
+            'supprimer' => false
+        ]);
+
+        return $this->render('sous_departement/Liste.html.twig', [
+            'sousdepartement' => $sousdepartement
+        ]);
+    }
 }

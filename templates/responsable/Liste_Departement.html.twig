@@ -1,0 +1,124 @@
+{% extends 'root.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{asset('select/select.css')}}">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,700" rel="stylesheet" type="text/css">
+
+	<link rel=" stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css ">
+
+	<link rel="stylesheet" href="{{asset('parent/css/style.css')}} ">
+{% endblock %}
+
+
+{% block javascripts %}
+
+	<script src="{{asset('table/vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+	<script src="{{asset('table/vendor/bootstrap/js/popper.js')}}"></script>
+	<script src="{{asset('table/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+	<script src="{{asset('table/vendor/select2/select2.min.js')}}"></script>
+	<script src="{{asset('table/js/main.js')}}"></script>
+
+
+	<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+
+
+	<script>
+		$(document).ready(function () {
+$('#myTable').DataTable({
+"aaSorting": [],
+language: {
+url: 'https://cdn.datatables.net/plug-ins/1.12.0/i18n/fr-FR.json'
+}
+});
+});
+	</script>
+	<script>
+		function fermer() {
+
+document.getElementById("toast1").hidden = true
+}
+	</script>
+{% endblock %}
+
+{% block title %}Compte
+{% endblock %}
+{% block body %}
+
+	<div class="container">
+		<h2>Liste de Responsables</h2>
+		<br>
+
+
+		{% if responsables  is not null %}
+
+
+			<div class="row mt-3">
+				<table class="table table-bordered" id="myTable" data-vertable="ver1">
+
+					<tr class="row100 head">
+
+
+						<th class="column100 column3" data-column="column3">Numero
+						</th>
+						<th class="column100 column2" data-column="column2">Nom</th>
+						<th class="column100 column2" data-column="column2">Departement</th>
+						<th class="column100 column2" data-column="column2">Sous-Departement</th>
+
+					</tr>
+
+					<tbody>
+
+
+						{% for responsables in responsables %}
+
+							<tr class="row100">
+
+
+								<td class="column100 column2" data-column="column2">{{ loop.index }}</td>
+								<td class="column100 column3" data-column="column3">{{responsables.fidel.nom}}
+									{{responsables.fidel.postnom}}
+									{{responsables.fidel.prenom}}
+
+
+								</td>
+
+								{% if responsables is null  %}
+									<td class="column100 column3" data-column="column3">.........</td>
+								{% else %}
+									{% if responsables.departement.Nom is defined %}
+										<td class="column100 column3" data-column="column3">{{ responsables.departement.Nom }}</td>
+									{% else %}
+										<td class="column100 column3" data-column="column3">..................</td>
+									{% endif %}
+
+									{% if responsables.sousdepartement.nom is defined %}
+										<td class="column100 column3" data-column="column3">{{ responsables.sousdepartement.nom }}</td>
+									{% else %}
+										<td class="column100 column3" data-column="column3">...................</td>
+									{% endif %}
+								{% endif %}
+
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		{% endif %}
+	</div>
+	{% for message in app.flashes('notification') %}
+
+		<div class="toast show" role="alert" id="toast1" data-delay="5000" style="position: absolute; top: 1rem; right: 1rem; min-width:250px;" aria-live="assertive" aria-atomic="true">
+			<div class="toast-header">
+				<strong class="me-auto">Message</strong>
+				<small></small>
+				<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Fermer" onclick="fermer()">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="toast-body">
+				<p class="text-danger">{{message}}</p>
+			</div>
+		</div>
+	{% endfor %}
+{% endblock %}

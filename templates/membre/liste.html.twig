@@ -1,0 +1,299 @@
+{% extends "root.html.twig" %}
+
+{% block stylesheets %}
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,700" rel="stylesheet" type="text/css">
+
+	<link rel=" stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css ">
+
+	<link rel="stylesheet" href="{{asset('parent/css/style.css')}} ">
+
+	<style>
+
+		#search-container {
+			display: flex;
+			border: 1px solid #dfe1e5;
+			border-radius: 24px;
+			overflow: hidden;
+			width: 400px;
+			max-width: 100%;
+			box-shadow: 0 4px 6px rgba(32, 33, 36, 0.1);
+		}
+
+		#search-input {
+			flex: 1;
+			border: none;
+			padding: 10px;
+			font-size: 16px;
+			outline: none;
+		}
+
+		#search-button {
+			background-color: #4285f4;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			cursor: pointer;
+			outline: none;
+		}
+	</style>
+{% endblock %}
+
+{% block javascripts %}
+
+	<script src="{{asset('parent/js/jquery.min.js')}} "></script>
+	<script src="{{asset('parent/js/popper.js')}} "></script>
+	<script src="{{asset('parent/js/bootstrap.min.js')}} "></script>
+	<script src="{{asset('parent/js/jquery.validate.min.js')}} "></script>
+	<script src="{{asset('parent/js/main.js')}} "></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="{{ asset('js/selects.js') }}"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+	<script>
+		function fermer() {
+
+document.getElementById("toast1").hidden = true
+}
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="{{asset('table/vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+	<script src="{{asset('table/vendor/bootstrap/js/popper.js')}}"></script>
+	<script src="{{asset('table/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+	<script src="{{asset('table/vendor/select2/select2.min.js')}}"></script>
+	<script src="{{asset('table/js/main.js')}}"></script>
+	<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+
+
+	<script>
+		$(document).ready(function () {
+$('#myTable').DataTable({
+language: {
+url: 'https://cdn.datatables.net/plug-ins/1.12.0/i18n/fr-FR.json'
+}
+});
+});
+	</script>
+{% endblock %}
+{% block body %}
+
+	<section class="ftco-section ">
+
+		<div class="container ">
+
+			<div class="row justify-content-center ">
+				<div class="col-md-12 ">
+					<div class="wrapper ">
+						<div class="row no-gutters ">
+
+							<div class="col-md-4 col-sm-12">
+								<img src="{{ asset('image/trinite.jpg') }}" style="height: 100px; background-color:white">
+							</div>
+							<br>
+
+							<h3>Liste de Tous les fidels</h3>
+							<div class="col-lg-8 col-md-7 order-md-last d-flex align-items-stretch ">
+
+								<div class="contact-wrap w-100 p-md-5 p-4 "></div>
+
+							</div>
+							{% if fidels %}
+								<table id="myTable" class="table table-bordered">
+									<caption>C.E LA TRINITE</caption>
+									<thead>
+										<tr>
+											<th>Nom</th>
+											<th>Postnom</th>
+											<th>Prenom</th>
+											<th>Sexe</th>
+											<th>Categorie</th>
+											<th>Date Naissance</th>
+
+											<th>Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+
+										{% for fidel in fidels %}
+
+
+											<tr>
+												<td class="pl-2">
+													{{fidel.nom}}</td>
+												<td class="pl-2">{{fidel.postnom}}</td>
+												<td class="pl-2">{{fidel.prenom}}</td>
+												<td class="pl-2">{{fidel.sexe}}</td>
+												<td class="pl-2">{{fidel.categorie}}</td>
+												<td class="pl-2">{{fidel.DateNaissance | date("d/m/Y")}}</td>
+
+
+												<td class="pl-2">
+													<button type="button" class="btn btn-dark bg-opacity-25" data-toggle="modal" data-target="#{{fidel.id}}">
+														<i class="fa-solid fa-eye"></i>
+														Voir</button>
+												</td>
+											</tr>
+										{% endfor %}
+
+									</tbody>
+								</table>
+							{% endif %}
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	{% for fidel in fidels %}
+
+		<div class="modal fade" id="{{fidel.id}}" tabindex="-1" aria-labelledby="task1_ModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+
+						<div class="row">
+							<div class="col-md-4 col-sm-12">
+								<img src="{{ asset('image/trinite.jpg') }}" style="height: 75px">
+							</div>
+							<br>
+							<br>
+						</div>
+
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="fermerr()">
+							<span aria-hidden="true">X</span>
+						</button>
+					</div>
+					<div class="modal-body">
+
+						<p style="font-size: 90%; margin-bottom: 1%;" id="infos">
+							<span style="font-weight: bold;">
+								Nom:
+							</span>
+							{{ fidel.nom }}
+						</p>
+						<p style="font-size: 90%; margin-bottom: 1%" id="infos">
+							<span style="font-weight: bold;">Postnom:
+							</span>
+							{{ fidel.postnom }}
+						</p>
+						<p style="font-size: 90%; margin-bottom: 1%;" id="infos">
+							<span style="font-weight: bold;">Prenom:
+							</span>
+							{{ fidel.prenom }}
+						</p>
+						<p style="font-size: 90%; margin-bottom: 1%;" id="infos">
+							<span style="font-weight: bold;">Sexe:
+							</span>
+							{{ fidel.sexe }}
+						</p>
+
+
+						<p style="font-size: 90%; margin-bottom: 1%;" id="infos">
+							<span style="font-weight: bold;">Lieu_Naissance:
+							</span>
+							{{ fidel.lieunaissance }}
+						</p>
+						<p style="font-size: 90%; margin-bottom: 1%;" id="infos">
+							<span style="font-weight: bold;">Date de  naissance:</span>
+							{{ fidel.DateNaissance | date("d/m/Y") }}
+						</p>
+
+						<p style="font-size: 90%; margin-bottom: 1%;" id="infos">
+							<span style="font-weight: bold;">Avenue:
+							</span>
+							{{ fidel.avenue }}
+							&nbsp;
+							<span style="font-weight: bold;">
+								N°:
+							</span>
+							{{ fidel.numeroadresse }}
+							&nbsp;
+							<span style="font-weight: bold;">
+								Quartier:
+							</span>
+							{{ fidel.quartier}}
+							&nbsp;
+							<span style="font-weight: bold;">
+								Commune:
+							</span>
+							{{ fidel.commune}}
+							&nbsp;
+							<span style="font-weight: bold;">
+								Ville:
+							</span>
+							{{ fidel.ville}}
+							&nbsp;
+							<span style="font-weight: bold;">
+								Province:
+							</span>
+							{{ fidel.province}}
+							&nbsp;
+						</p>
+						<span style="font-weight: bold;">
+							Departement:
+						</span>
+
+
+						{% if  fidel.departement %}
+							{{ fidel.departement.nom}}
+						{% endif %}
+
+						{% if not fidel.departement %}
+							il(elle) n'est pas dans un departement
+						{% endif %}
+
+						&nbsp;
+						<span style="font-weight: bold;">
+							Sous_Departement:
+						</span>
+
+
+						{% if fidel.sousdepartement %}
+							{{ fidel.sousdepartement.nom}}
+						{% endif %}
+
+						{% if not fidel.sousdepartement %}
+							il(elle) n'est pas dans un sous departement
+						{% endif %}
+
+						&nbsp;
+
+						<p style="font-size: 90%; margin-bottom: 1%;" id="infos">
+
+							<span style="font-weight: bold;">
+								<i class="fa fa-phone"></i>
+								Numero_Telephone:</span>
+							{{fidel.NumeroPhone}}
+							&nbsp;
+
+						</p>
+
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-info" data-dismiss="modal" onclick="fermerr()">Fermer</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	{% endfor %}
+	{% for message in app.flashes('notification') %}
+
+		<div class="toast show" role="alert" id="toast1" data-delay="5000" style="position: absolute; top: 1rem; right: 1rem; min-width:250px;" aria-live="assertive" aria-atomic="true">
+			<div class="toast-header">
+				<strong class="me-auto">Message</strong>
+				<small></small>
+				<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Fermer" onclick="fermer()">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="toast-body">
+				<p class="text-danger">{{message}}</p>
+			</div>
+		</div>
+	{% endfor %}
+{% endblock %}

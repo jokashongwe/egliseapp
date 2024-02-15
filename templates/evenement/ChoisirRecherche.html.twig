@@ -1,0 +1,55 @@
+{% extends 'root.html.twig' %}
+
+{% block javascripts %}
+
+	<script src="{{asset('table/vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+	<script src="{{asset('table/vendor/bootstrap/js/popper.js')}}"></script>
+	<script src="{{asset('table/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+	<script src="{{asset('table/vendor/select2/select2.min.js')}}"></script>
+	<script src="{{asset('table/js/main.js')}}"></script>
+
+
+	<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+
+	<script>
+		$(document).ready(function () {
+$('#myTable').DataTable({
+language: {
+url: 'https://cdn.datatables.net/plug-ins/1.12.0/i18n/fr-FR.json'
+}
+});
+});
+	</script>
+
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{asset('select/select.css')}}">
+
+
+{% endblock %}
+
+
+{% block title %}Compte
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<h2>Choisir le type de Recherche</h2>
+		<br>
+
+
+		<a href="  {{path('RechercheEvenement_Jounaliere')}}" class="btn btn-primary">Recherche Journaliere</a>
+
+
+		<a href=" {{path('RechercheEvenement_Mois')}} " class="btn btn-success">Recherche Mensuelle</a>
+
+		<a href=" {{path('RechercheEvenement_Jour')}} " class="btn btn-secondary">Recherche avec plage
+		</a>
+
+	</div>
+
+
+{% endblock %}

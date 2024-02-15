@@ -33,10 +33,14 @@ class Departement
     #[ORM\Column(nullable: true)]
     private ?bool $supprimer = null;
 
+    #[ORM\OneToMany(mappedBy: 'departement', targetEntity: Responsable::class)]
+    private Collection $responsables;
+
     public function __construct()
     {
         $this->sousDepartements = new ArrayCollection();
         $this->fidels = new ArrayCollection();
+        $this->responsables = new ArrayCollection();
     }
 
 
@@ -150,6 +154,36 @@ class Departement
     public function setSupprimer(?bool $supprimer): static
     {
         $this->supprimer = $supprimer;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Responsable>
+     */
+    public function getResponsables(): Collection
+    {
+        return $this->responsables;
+    }
+
+    public function addResponsable(Responsable $responsable): static
+    {
+        if (!$this->responsables->contains($responsable)) {
+            $this->responsables->add($responsable);
+            $responsable->setDepartement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeResponsable(Responsable $responsable): static
+    {
+        if ($this->responsables->removeElement($responsable)) {
+            // set the owning side to null (unless already changed)
+            if ($responsable->getDepartement() === $this) {
+                $responsable->setDepartement(null);
+            }
+        }
 
         return $this;
     }
