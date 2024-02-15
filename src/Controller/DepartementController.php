@@ -64,4 +64,57 @@ class DepartementController extends AbstractController
         }
         return $this->render('departement/index.html.twig');
     }
+
+    #[Route('/departement/Modification_Departement', name: 'Modification_Departement')]
+    public function indeex(
+        NotifierInterface $notifier,
+        ManagerRegistry $doctrine,
+        Request $request,
+        EntityManagerInterface $manager,
+        Security $security
+    ): Response {
+
+        $departement = $doctrine->getRepository(Departement::class)->findBy([
+            'supprimer' => false
+        ]);
+
+        return $this->render('departement/modification.html.twig', [
+            'departement' => $departement
+        ]);
+    }
+
+    #[Route('/departement/Modification_Departementok/{id}', name: 'Modification_Departementok')]
+    public function indeeex(
+        $id,
+        NotifierInterface $notifier,
+        ManagerRegistry $doctrine,
+        Request $request,
+        EntityManagerInterface $manager,
+        Security $security
+    ): Response {
+
+        $departement = $doctrine->getRepository(Departement::class)->find($id);
+
+        return $this->render('departement/modificationOK.html.twig', [
+            'departement' => $departement
+        ]);
+    }
+
+    #[Route('/departement/Liste_Departement', name: 'Liste_Departement')]
+    public function inddeeex(
+        NotifierInterface $notifier,
+        ManagerRegistry $doctrine,
+        Request $request,
+        EntityManagerInterface $manager,
+        Security $security
+    ): Response {
+
+        $departement = $doctrine->getRepository(Departement::class)->findBy([
+            'supprimer' => false
+        ]);
+
+        return $this->render('departement/Liste_Departement.html.twig', [
+            'departement' => $departement
+        ]);
+    }
 }

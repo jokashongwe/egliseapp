@@ -1,0 +1,105 @@
+{% extends 'root.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block stylesheets %}
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{% endblock %}
+
+
+{% block javascripts %}
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<!-- Inclure jQuery dans votre fichier de modèle de base -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+	<script>
+		$(document).ready(function () {
+var timeout;
+
+$('#searchTerm').on('keyup', function () {
+clearTimeout(timeout);
+
+timeout = setTimeout(function () {
+var searchTerm = $('#searchTerm').val();
+
+$.ajax({
+url: '/search',
+type: 'GET',
+data: {
+term: searchTerm
+},
+success: function (data) {
+displayResults(data);
+},
+error: function (error) {
+console.error('Erreur lors de la recherche', error);
+}
+});
+}, 300); // Attendre 300 ms après la dernière frappe
+});
+
+function displayResults(results) {
+var resultsContainer = $('#searchResults');
+resultsContainer.empty(); // Effacez les résultats précédents
+
+results.forEach(function (result) {
+resultsContainer.append('<p>' + result.nom + ' ' + result.postnom + ' ' + result.prenom + '</p>');
+
+// Ajoutez d'autres champs selon vos besoins
+});
+}
+});
+	</script>
+
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-md-6"></form>
+			<form method="POST" action="{{path('EnvoiSmsIndividuel')}}" id="contactForm " name="contactForm " class="contactForm ">
+				<h2 class="text-center mb-4">Envoi Message</h2>
+				<div class="col-md-12 ">
+					<div class="form-group">
+						<label for="searchTerm">Numéro de Téléphone :</label>
+						<input type="text" class="form-control" id="searchTerm" name="searchTerm" placeholder="+243845780014" required>
+					</div>
+					<div id="searchResults"></div>
+
+				</div>
+				<div class="col-md-12 ">
+					<div class="form-group ">
+						<label class="label " for="# ">Message</label>
+						<textarea name="message" class="form-control " id="message " cols="30 " rows="4 " placeholder="Message " required></textarea>
+					</div>
+				</div>
+				<div class="col-md-4 ">
+					<button type="submit" class="btn btn-success btn-block">Envoyer</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- Ajoutez jQuery et Popper.js avant Bootstrap JavaScript -->
+{% for message in app.flashes('notification') %}
+
+	<div class="toast show" role="alert" id="toast1" data-delay="5000" style="position: absolute; top: 1rem; right: 1rem; min-width:250px;" aria-live="assertive" aria-atomic="true">
+		<div class="toast-header">
+			<strong class="me-auto">Message</strong>
+			<small></small>
+			<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Fermer" onclick="fermer()">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="toast-body">
+			<p class="text-danger">{{message}}</p>
+		</div>
+	</div>
+{% endfor %}{% endblock %}

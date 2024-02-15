@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Fidel;
 use App\Entity\Departement;
+use App\Repository\FidelRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,22 +28,30 @@ class PartageController extends AbstractController
 
         NotifierInterface $notifier,
         EntityManagerInterface $manager,
-        Security $security
+        Security $security,
+        FidelRepository $fidelRepository
     ): Response {
+        $fidels = [];
 
 
+        $nom = $request->get('nom');
+        if (strtolower($request->getMethod()) == "post") {
+            $fidels = $doctrine->getRepository(Fidel::class)->findbyRecherche($nom);
 
+
+            if (!$fidels && $fidels == null) {
+                $notifier->send(new Notification("Erreur, le fidel recherché n'existe pas", ['browser']));
+                return $this->redirectToRoute('Partage');
+            }
+        }
+        $fidelsTotal = $fidelRepository->findByValueStatistiquetotal();
+
+        $MTM = $fidelsTotal[0];
+        $MT = $MTM['total'];
 
 
 
         $nMembre = $managerRegistry->getRepository(Fidel::class)->NbrMembre();
-
-
-        // $nEleveAbandons = $managerRegistry->getRepository(Eleve::class)->countEleveAbandons($anneeScolaire->getannee_scolaire());
-
-        // $nAgent = $managerRegistry->getRepository(Agent::class)->countAgent();
-
-        // //dd($nAgent);
 
         $nMembreParSexe = $managerRegistry->getRepository(Fidel::class)->countMembreBySexe();
         $cResultat = $managerRegistry->getRepository(Fidel::class)->countBycategorie();
@@ -52,23 +61,6 @@ class PartageController extends AbstractController
             $categorieLabel[] = $resultat['categorie'];
             $categorieValeur[] = $resultat['nbr'];
         }
-        // $sectionsLabel = [];
-        // $sectionsValeur = [];
-        // foreach ($cResultat as $resultat) {
-        //     $sectionsLabel[] = $resultat['section'];
-        //     $sectionsValeur[] = $resultat['nbr'];
-        // }
-        // $eleves = [];
-        // if (strtolower($request->getMethod()) == 'post') {
-        //     $n = $request->get('cherche');
-
-
-        //     $eleves = $doctrine->getRepository(Eleve::class)->findBy1Value($n, $anneeScolaire->getannee_scolaire());
-        //     /// je vais gerer le coté empty du vide ... une condition gerant le vide
-        //     if (!$eleves && $n != null) {
-        //         $this->addFlash('danger', 'L\'ELEVE N\'EXISTE PAS!');
-        //     }
-        // }
 
         return $this->render("partage/index.html.twig", [
             'eleves' => [],
@@ -77,7 +69,9 @@ class PartageController extends AbstractController
             'categorieLabel' => $categorieLabel,
             'categorieValeur' => $categorieValeur,
             'nAgent' => [],
-            'EleveAbandons' => []
+            'EleveAbandons' => [],
+            'fidels' => $fidels,
+            'total' => $MT
         ]);
     }
 }

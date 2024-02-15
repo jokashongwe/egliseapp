@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\FidelRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -84,11 +86,28 @@ class Fidel
     private ?\DateTimeInterface $dateEnregistrement = null;
 
     #[ORM\ManyToOne(inversedBy: 'fidels')]
-
     private ?SousDepartement $sousdepartement = null;
 
     #[ORM\ManyToOne(inversedBy: 'fidels')]
     private ?Departement $departement = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $datemodif = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $modifIdUtilisateur = null;
+
+    #[ORM\OneToMany(mappedBy: 'fidel', targetEntity: User::class)]
+    private Collection $users;
+
+    #[ORM\OneToMany(mappedBy: 'fidel', targetEntity: Responsable::class)]
+    private Collection $responsables;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+        $this->responsables = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -392,6 +411,90 @@ class Fidel
     public function setDepartement(?departement $departement): static
     {
         $this->departement = $departement;
+
+        return $this;
+    }
+
+    public function getDatemodif(): ?\DateTimeInterface
+    {
+        return $this->datemodif;
+    }
+
+    public function setDatemodif(?\DateTimeInterface $datemodif): static
+    {
+        $this->datemodif = $datemodif;
+
+        return $this;
+    }
+
+    public function getModifIdUtilisateur(): ?string
+    {
+        return $this->modifIdUtilisateur;
+    }
+
+    public function setModifIdUtilisateur(?string $modifIdUtilisateur): static
+    {
+        $this->modifIdUtilisateur = $modifIdUtilisateur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->setFidel($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getFidel() === $this) {
+                $user->setFidel(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Responsable>
+     */
+    public function getResponsables(): Collection
+    {
+        return $this->responsables;
+    }
+
+    public function addResponsable(Responsable $responsable): static
+    {
+        if (!$this->responsables->contains($responsable)) {
+            $this->responsables->add($responsable);
+            $responsable->setFidel($this);
+        }
+
+        return $this;
+    }
+
+    public function removeResponsable(Responsable $responsable): static
+    {
+        if ($this->responsables->removeElement($responsable)) {
+            // set the owning side to null (unless already changed)
+            if ($responsable->getFidel() === $this) {
+                $responsable->setFidel(null);
+            }
+        }
 
         return $this;
     }

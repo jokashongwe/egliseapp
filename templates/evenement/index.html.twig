@@ -1,0 +1,189 @@
+{% extends "root.html.twig" %}
+
+{% block stylesheets %}
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,700" rel="stylesheet" type="text/css">
+
+	<link rel=" stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css ">
+
+	<link rel="stylesheet" href="{{asset('parent/css/style.css')}} ">
+
+	<style>
+
+
+		/* Cacher le formulaire par défaut */
+		#monFormulaire {
+			display: none;
+		}
+	</style>
+{% endblock %}
+
+{% block javascripts %}
+
+	<script src="{{asset('parent/js/jquery.min.js')}} "></script>
+	<script src="{{asset('parent/js/popper.js')}} "></script>
+	<script src="{{asset('parent/js/bootstrap.min.js')}} "></script>
+	<script src="{{asset('parent/js/jquery.validate.min.js')}} "></script>
+	<script src="{{asset('parent/js/main.js')}} "></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="{{ asset('js/selects.js') }}"></script>
+
+	<script>
+
+
+		function toggleFormVisibility() {
+var checkbox = document.getElementById("toggleCheckbox");
+var formulaire = document.getElementById("monFormulaire");
+
+// Vérifier si la case est cochée ou non
+if (checkbox.checked) { // Afficher le formulaire si la case est cochée
+formulaire.style.display = "block";
+} else { // Cacher le formulaire si la case est désélectionnée
+formulaire.style.display = "none";
+}
+}
+	</script>
+
+	<script>
+
+		function fermer() {
+
+document.getElementById("toast1").hidden = true
+}
+	</script>
+
+	<script>
+		document.getElementById('departement').addEventListener('change', function () {
+var departementId = this.value;
+
+// Utiliser AJAX pour récupérer les sous-départements depuis le serveur
+fetch('/get-sous-departements/' + departementId).then(response => response.json()).then(data => {
+var sousDepartementSelect = document.getElementById('sousDepartement');
+sousDepartementSelect.innerHTML = '<option value="">Sélectionnez un Sous Département</option>';
+
+data.forEach(function (sousDepartement) {
+sousDepartementSelect.innerHTML += '<option value="' + sousDepartement + '">' + sousDepartement + '</option>';
+});
+}).catch(error => console.error('Erreur lors de la récupération des Sous Départements', error));
+});
+	</script>
+{% endblock %}
+
+
+{% block body %}
+
+	<section class="ftco-section ">
+
+		<div class="container ">
+
+			<div class="row justify-content-center ">
+				<div class="col-md-12 ">
+					<div class="wrapper ">
+						<div class="row no-gutters ">
+							<div class="col-lg-8 col-md-7 order-md-last d-flex align-items-stretch ">
+								<div class="contact-wrap w-100 p-md-5 p-4 ">
+									<div class="col-md-4 col-sm-12">
+										<img src="{{ asset('image/trinite.jpg') }}" style="height: 100px; background-color:white">
+									</div>
+									<div id="form-message-warning " class="mb-4"></div>
+									<div id="form-message-success " class="mb-4"></div>
+
+									<form method="POST" action="{{path('Creation_Evenement')}}" id="contactForm " name="contactForm " class="contactForm ">
+
+										<div class="row">
+											<div class="col-md-6 ">
+												<div class="form-group ">
+													<label class="label" for="name">Titre</label>
+													<input type="text" class="form-control required" id="first-name" name="titre" placeholder="Nom" required>
+												</div>
+											</div>
+
+											<div class="col-md-6 ">
+												<div class="form-group ">
+													<label class="label" for="name">
+														Date de l'évenement
+													</label>
+													<input type="date" class="form-control" name="date" placeholder="" required>
+												</div>
+											</div>
+										</div>
+
+										<div class="row ">
+											<div class="col-md-12 ">
+												<div class="form-group ">
+													<label class="label " for="# ">Description</label>
+													<textarea name="observation" class="form-control " id="message " cols="30 " rows="4 " placeholder="Message " required></textarea>
+												</div>
+											</div>
+											<div class="col-md-12 ">
+												<div class="form-group ">
+													<button type="submit" class="btn btn-info ">Enregistrer</button>
+													<div class="submitting "></div>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-5 d-flex align-items-stretch ">
+								<div class="info-wrap bg-info w-100 p-md-5 p-4 ">
+
+									<br>
+									<div class="dbox w-100 d-flex align-items-start ">
+
+										<div class="icon d-flex align-items-center justify-content-center ">
+											<span class="fa fa-map-marker "></span>
+										</div>
+
+										<div class="text pl-3 ">
+											<p>
+												<span>Addresse:</span>...........................</p>
+										</div>
+									</div>
+									<div class="dbox w-100 d-flex align-items-center ">
+										<div class="icon d-flex align-items-center justify-content-center ">
+											<span class="fa fa-phone "></span>
+										</div>
+										<div class="text pl-3 ">
+											<p>
+												<span>Phone:</span>
+												<a href="">...................</a>
+											</p>
+										</div>
+									</div>
+									<div class="dbox w-100 d-flex align-items-center ">
+										<div class="icon d-flex align-items-center justify-content-center ">
+											<span class="fa fa-paper-plane "></span>
+										</div>
+										<div class="text pl-3 ">
+											<p>
+												<span>Email:</span>
+												<a href="...................">
+													...........................</a>
+											</p>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	{% for message in app.flashes('notification') %}
+
+		<div class="toast show" role="alert" id="toast1" data-delay="5000" style="position: absolute; top: 1rem; right: 1rem; min-width:250px;" aria-live="assertive" aria-atomic="true">
+			<div class="toast-header">
+				<strong class="me-auto">Message</strong>
+				<small></small>
+				<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Fermer" onclick="fermer()">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="toast-body">
+				<p class="text-danger">{{message}}</p>
+			</div>
+		</div>
+	{% endfor %}
+{% endblock %}

@@ -31,6 +31,12 @@
 	<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 
+	<script>
+		function fermer() {
+
+document.getElementById("toast1").hidden = true
+}
+	</script>
 
 	<script>
 		function toggleMotDePasse() {
@@ -46,12 +52,7 @@ afficherMotDePasseSpan.innerText = '';
 }
 }
 	</script>
-	<script>
-		function fermer() {
 
-document.getElementById("toast1").hidden = true
-}
-	</script>
 
 	<script>
 		function toggleMotDePasseC() {
@@ -127,8 +128,8 @@ searchResults.hide();
 	<div class="container mt-5">
 		<div class="row justify-content-center">
 			<div class="col-md-6">
-				<form method="POST" action="{{path('Creation_User')}}" id="search-form">
-					<h2 class="text-center mb-4">Création Utilisateur</h2>
+				<form method="POST" action="{{path('Modification_User')}}" id="search-form">
+					<h2 class="text-center mb-4">Modication Utilisateur</h2>
 
 
 					<div class="form-group mb-4">
@@ -136,7 +137,7 @@ searchResults.hide();
 						<input type="email" name="email" class="form-control" placeholder="johndoe@gmail.com">
 					</div>
 					<div class="form-group mb-3">
-						<label class="label" for="password">MOT DE PASSE</label>
+						<label class="label" for="password">NOUVEAU MOT DE PASSE</label>
 						<input type="password" id="motDePasse" name="motDePasse" class="form-control" placeholder="Password">
 						<span toggle="#password-field" onclick="toggleMotDePasse()" id="afficherMotDePasse" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 					</div>

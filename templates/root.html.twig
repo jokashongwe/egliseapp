@@ -64,13 +64,16 @@
 									<a class="dropdown-item" href="{{path('identification_fidel')}}">Nouvel Enregistrement</a>
 								</li>
 								<li>
-									<a class="dropdown-item" href="">Liste de Membres</a>
+									<a class="dropdown-item" href=" {{path('liste_fidel')}} ">Liste de Membres</a>
 								</li>
 								<li>
-									<a class="dropdown-item" href="">Recherche d'un Membre</a>
+									<a class="dropdown-item" href=" {{path('recherche_fidel')}} ">Recherche d'un Membre</a>
 								</li>
 								<li>
-									<a class="dropdown-item" href="">Modication d'un Membre</a>
+									<a class="dropdown-item" href=" {{path('modification_fidel')}} ">Modication d'un Membre</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href=" {{path('suppression_fidel')}} ">Suppression d'un Membre</a>
 								</li>
 
 							</ul>
@@ -132,7 +135,7 @@
 							</a>
 							<ul class="dropdown-menu dropdown-submenu">
 								<li>
-									<a class="dropdown-item" href="">Statistique</a>
+									<a class="dropdown-item" href="{{path('ouvrier_statistique')}}">Statistique</a>
 								</li>
 
 							</ul>
@@ -145,16 +148,10 @@
 									<a class="dropdown-item" href="{{path('Creation_Departement')}}">Creation Departement</a>
 								</li>
 								<li>
-									<a class="dropdown-item" href="">Modication Departement</a>
+									<a class="dropdown-item" href=" {{path('Modification_Departement')}} ">Modication Departement</a>
 								</li>
 								<li>
-									<a class="dropdown-item" href="">Suppression Departement</a>
-								</li>
-								<li>
-									<a class="dropdown-item" href="">Liste Departement</a>
-								</li>
-								<li>
-									<a class="dropdown-item" href="">Responsable</a>
+									<a class="dropdown-item" href="{{path('Liste_Departement')}}">Liste Departement</a>
 								</li>
 
 							</ul>
@@ -167,16 +164,10 @@
 									<a class="dropdown-item" href="{{path('Creation_Sousdepartement')}}">Creation Sous-Departement</a>
 								</li>
 								<li>
-									<a class="dropdown-item" href="">Modication Sous-Departement</a>
+									<a class="dropdown-item" href=" {{path('Modification_SousDepartement')}} ">Modication Sous-Departement</a>
 								</li>
 								<li>
-									<a class="dropdown-item" href="">Suppression Sous-Departementt</a>
-								</li>
-								<li>
-									<a class="dropdown-item" href="">Liste Sous-Departement</a>
-								</li>
-								<li>
-									<a class="dropdown-item" href="">Responsable</a>
+									<a class="dropdown-item" href=" {{path('Liste_SousDepartement')}} ">Liste Sous-Departement</a>
 								</li>
 
 							</ul>
@@ -189,18 +180,31 @@
 									<a class="dropdown-item" href=" {{path('Creation_User')}} ">Creation Utilisateur</a>
 								</li>
 								<li>
-									<a class="dropdown-item" href="">Modification Utilisateur</a>
+									<a class="dropdown-item" href=" {{path('Modification_User')}} ">Modification Utilisateur</a>
 								</li>
 								<li>
-									<a class="dropdown-item" href="">Supprimer Utilisateur</a>
+									<a class="dropdown-item" href=" {{path('Supprimer_User')}} ">Supprimer Utilisateur</a>
 								</li>
 								<li>
-									<a class="dropdown-item" href="">liste Utilisateur</a>
+									<a class="dropdown-item" href=" {{path('Liste_user')}} ">liste Utilisateur</a>
 								</li>
 							</ul>
 						</li>
 						<li>
-							<a class="dropdown-item" href="">Cas de décès</a>
+							<a class="dropdown-item" href="#">Responsable<i class="fa-solid fa-caret-right"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-submenu">
+								<li>
+									<a class="dropdown-item" href=" {{path('Enregistrement_responsable')}} ">Affectation</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href=" {{path('Modifier_responsable')}} ">Modification
+									</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="{{path('Liste_responsable')}}">Liste</a>
+								</li>
+							</ul>
 						</li>
 
 					</ul>
@@ -227,7 +231,7 @@
 					</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 						<li>
-							<a class="dropdown-item" href="">Envoi Sms</a>
+							<a class="dropdown-item" href=" {{path('EnvoiSmsIndividuel')}} ">Envoi Sms</a>
 						</li>
 
 						<li>
@@ -242,19 +246,28 @@
 
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-						Evenements
+						Calendrier
 					</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 						<li>
-							<a class="dropdown-item" href="">Mariage</a>
+							<a class="dropdown-item" href="#">Evenements<i class="fa-solid fa-caret-right"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-submenu">
+								<li>
+									<a class="dropdown-item" href=" {{path('Creation_Evenement')}} ">Enregistrement</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href=" {{path('Modification_Evenement')}} ">Modification</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href=" {{path('Choisir_ModeRechercheEvenement')}} ">Calendrier des Activités
+									</a>
+								</li>
+
+							</ul>
 						</li>
 
-						<li>
-							<a class="dropdown-item" href="">Convention et seminaire</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="">Autres</a>
-						</li>
+
 					</ul>
 				</li>
 
