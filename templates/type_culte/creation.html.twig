@@ -1,7 +1,6 @@
 {% extends 'root.html.twig' %}
 
-{% block title %}Hello DepartementController!
-{% endblock %}
+{% block title %}{% endblock %}
 
 {% block stylesheets %}
 
@@ -21,28 +20,16 @@
 	<div class="container mt-5">
 		<div class="row justify-content-center">
 			<div class="col-md-6">
-				<form method="POST" action="{{path('Creation_Sousdepartement')}}" id="contactForm " name="contactForm " class="contactForm ">
-					<h2 class="text-center mb-4">Création Sous-Département</h2>
-
+				<form method="POST" action="{{path('Creation_Departement')}}" id="contactForm " name="contactForm " class="contactForm ">
+					<h2 class="text-center mb-4">Création Type de Culte</h2>
 
 					<div class="form-group">
-
-						<label class="label" for="name">Département attaché</label>
-						<select class="form-select" name="departement">
-
-							<option value="">Selectionner le département attaché</option>
-
-							{% for item in departement %}
-								<option value="{{item.id}}">{{item.nom}}</option>
-							{% endfor %}
-						</select>
-					</div>
-					<br>
-					<div class="form-group">
-						<label for="nom">Nom Sous-Département :</label>
+						<label for="nom">
+							Libelle:</label>
 						<input type="text" class="form-control" id="nom" name="nom" required>
 					</div>
 					<br>
+
 
 					<button type="submit" class="btn btn-success btn-block">Enregistrer</button>
 				</form>
@@ -51,7 +38,6 @@
 	</div>
 
 	<!-- Ajoutez jQuery et Popper.js avant Bootstrap JavaScript -->
-
 	{% for message in app.flashes('notification') %}
 
 		<div class="toast show" role="alert" id="toast1" data-delay="5000" style="position: absolute; top: 1rem; right: 1rem; min-width:250px;" aria-live="assertive" aria-atomic="true">

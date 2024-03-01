@@ -38,31 +38,18 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-         - { path: ^/Partage, roles: ROLE_Developpeur,ROLE_Utilisateur,ROLE_Finance,ROLE_Administrateur }
-         - { path: ^/anniversaire, roles: ROLE_Utilisateur,ROLE_Developpeur,ROLE_Finance,ROLE_Administrateur }
-         - { path: ^/culte, roles: ROLE_Utilisateur,ROLE_Developpeur,ROLE_Finance,ROLE_Administrateur }
-         - { path: ^/departement, roles: ROLE_Utilisateur,ROLE_Developpeur,ROLE_Finance,ROLE_Administrateur }
-         - { path: ^/evenement, roles: ROLE_Utilisateur,ROLE_Developpeur,ROLE_Finance,ROLE_Administrateur }
-         - { path: ^/Membre, roles: ROLE_Utilisateur,ROLE_Developpeur,ROLE_Finance,ROLE_Administrateur }
-         - { path: ^/ouvrier, roles: ROLE_Utilisateur,ROLE_Developpeur,ROLE_Finance,ROLE_Administrateur }
-         - { path: ^/responsable, roles: ROLE_Utilisateur,ROLE_Developpeur,ROLE_Finance,ROLE_Administrateur }
-         - { path: ^/Sms, roles: ROLE_Utilisateur,ROLE_Developpeur,ROLE_Finance,ROLE_Administrateur }
-         - { path: ^/sous_departement, roles: ROLE_Utilisateur,ROLE_Developpeur,ROLE_Finance,ROLE_Administrateur }
-         - { path: ^/type/culte, roles: ROLE_Utilisateur,ROLE_Developpeur,ROLE_Finance,ROLE_Administrateur }
-         - { path: ^/user, roles: ROLE_Utilisateur,ROLE_Developpeur,ROLE_Finance,ROLE_Administrateur }
-
-
-
-
-
-
-
-
-
-
-
-        # - { path: ^/profile, roles: ROLE_USER }
-
+         - { path: ^/Partage, roles: [ROLE_Developpeur,ROLE_Utilisateur,ROLE_Finance,ROLE_Administrateur] }
+         - { path: ^/anniversaire, roles: [ROLE_Utilisateur,ROLE_Developpeur,ROLE_Finance,ROLE_Administrateur] }
+         - { path: ^/culte, roles: [ROLE_Utilisateur,ROLE_Developpeur,ROLE_Finance,ROLE_Administrateur] }
+         - { path: ^/departement, roles: [ROLE_Utilisateur,ROLE_Developpeur,ROLE_Finance,ROLE_Administrateur] }
+         - { path: ^/evenement, roles: [ROLE_Utilisateur,ROLE_Developpeur,ROLE_Finance,ROLE_Administrateur] }
+         - { path: ^/Membre, roles: [ROLE_Utilisateur,ROLE_Developpeur,ROLE_Finance,ROLE_Administrateur] }
+         - { path: ^/ouvrier, roles: [ROLE_Utilisateur,ROLE_Developpeur,ROLE_Finance,ROLE_Administrateur] }
+         - { path: ^/responsable, roles: [ROLE_Utilisateur,ROLE_Developpeur,ROLE_Finance,ROLE_Administrateur] }
+         - { path: ^/Sms, roles: [ROLE_Utilisateur,ROLE_Developpeur,ROLE_Finance,ROLE_Administrateur] }
+         - { path: ^/sous_departement, roles: [ROLE_Utilisateur,ROLE_Developpeur,ROLE_Finance,ROLE_Administrateur] }
+         - { path: ^/type/culte, roles: [ROLE_Utilisateur,ROLE_Developpeur,ROLE_Finance,ROLE_Administrateur] }
+         - { path: ^/user, roles: [ROLE_Utilisateur,ROLE_Developpeur,ROLE_Finance,ROLE_Administrateur] }
 when@test:
     security:
         password_hashers:
